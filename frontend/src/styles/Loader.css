@@ -1,0 +1,61 @@
+.loader {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.loader-circle {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  animation: loader-rotate 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.loader-primary .loader-circle {
+  border-color: var(--primary-color) transparent transparent transparent;
+}
+
+.loader-accent .loader-circle {
+  border-color: var(--accent-color) transparent transparent transparent;
+}
+
+.loader-small {
+  width: 24px;
+  height: 24px;
+}
+
+.loader-small .loader-circle {
+  border-width: 3px;
+}
+
+.loader-medium {
+  width: 40px;
+  height: 40px;
+}
+
+.loader-large {
+  width: 60px;
+  height: 60px;
+}
+
+.loader-large .loader-circle {
+  border-width: 5px;
+}
+
+@keyframes loader-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+[data-theme="dark"] .loader-circle {
+  border-left-color: var(--primary-color-dark);
+}

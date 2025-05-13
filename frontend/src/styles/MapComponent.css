@@ -1,0 +1,341 @@
+/* Mantener solo las animaciones principales al inicio */
+@keyframes pulsing-marker {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 150, 199, 0.7); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(0, 150, 199, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 150, 199, 0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInScale {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Estilos generales */
+.map-page {
+  padding: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+}
+
+.map-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.map-header h1 {
+  font-size: 2.2rem;
+  color: var(--primary-color-dark);
+  margin-bottom: 0.5rem;
+}
+
+.map-header p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+/* Estadísticas */
+.stats-banner {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: linear-gradient(45deg, #f0f9ff, #e6f7ff);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.price-distribution {
+  display: flex;
+  gap: 12px;
+}
+
+.price-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 40px;
+}
+
+.price-label {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.price-count {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Layout principal con sidebar y mapa */
+.map-content {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Estilos para el contenedor del mapa */
+.map-container {
+  height: 75vh;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 3px solid var(--map-border);
+}
+
+/* Estilos para popups */
+.leaflet-popup-content-wrapper {
+  border-radius: 12px !important;
+  padding: 0 !important;
+  overflow: hidden;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2) !important;
+  animation: fadeInScale 0.3s ease;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  width: 320px !important;
+}
+
+.popup-content {
+  position: relative;
+  width: 100%;
+  animation: slideIn 0.3s ease;
+}
+
+.popup-image {
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.popup-content h3 {
+  margin: 0;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+  color: white;
+  font-size: 1.2rem;
+}
+
+.popup-details {
+  padding: 15px;
+}
+
+.popup-specialty {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.popup-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.popup-stars {
+  color: #ffa41b;
+}
+
+.popup-price {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background-color: var(--background-light);
+  font-size: 0.9rem;
+  margin-left: 8px;
+}
+
+.popup-address {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 8px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.popup-address-icon {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.popup-actions {
+  padding: 15px;
+  border-top: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-directions {
+  padding: 8px;
+  text-align: center;
+  border-radius: 6px;
+  background-color: var(--background-light);
+  color: var(--text-color);
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.btn-directions:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.popup-close:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Controles del mapa */
+.map-controls {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1000;
+}
+
+.map-control-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+.map-control-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+}
+
+/* Diseño responsivo mejorado */
+@media (max-width: 992px) {
+  .map-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .filters-sidebar {
+    height: auto;
+    max-height: 350px;
+    margin-bottom: 1rem;
+  }
+
+  .map-container {
+    height: 60vh;
+  }
+}
+
+@media (max-width: 576px) {
+  .map-page {
+    padding: 1rem;
+  }
+
+  .map-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .map-header p {
+    font-size: 1rem;
+  }
+
+  .popup-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .map-container {
+    border-width: 2px;
+  }
+}
+
+/* Tema oscuro */
+[data-theme="dark"] .stats-banner {
+  background: linear-gradient(45deg, #2b2d3a, #363846);
+}
+
+[data-theme="dark"] .map-control-btn {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .leaflet-popup-content-wrapper,
+[data-theme="dark"] .leaflet-popup-tip {
+  background-color: var(--card-bg);
+}
+
+[data-theme="dark"] .popup-content h3 {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+}
+
+[data-theme="dark"] .leaflet-container {
+  filter: brightness(0.9) contrast(1.1);
+}
+
+/* Añadir esta regla al final del archivo */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}
