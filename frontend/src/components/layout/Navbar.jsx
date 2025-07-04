@@ -37,47 +37,37 @@ const Navbar = () => {
 
         <div className="navbar-actions">
           <ThemeToggle />
-          
-          <button 
-            className={`navbar-toggle ${menuOpen ? 'active' : ''}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Menú de navegación"
-            aria-expanded={menuOpen}
-          >
-            <span className="toggle-line"></span>
-            <span className="toggle-line"></span>
-            <span className="toggle-line"></span>
-          </button>
         </div>
 
-        <div className={`navbar-menu ${menuOpen ? 'active' : ''}`}>
+        <div className={`navbar-menu${menuOpen ? ' active' : ''}`}>
           <ul className="navbar-list">
-            <li className="navbar-item">
-              <Link 
-                to="/mapa" 
-                className={`navbar-link ${location.pathname === '/mapa' || location.pathname === '/' ? 'active' : ''}`}
-              >
+            <li>
+              <Link to="/mapa" className="navbar-link">
                 Mapa
               </Link>
             </li>
-            <li className="navbar-item">
-              <Link 
-                to="/about" 
-                className={`navbar-link ${location.pathname === '/about' ? 'active' : ''}`}
-              >
-                Acerca del sistema
+            <li>
+              <Link to="/about" className="navbar-link">
+                Acerca de
               </Link>
             </li>
-            <li className="navbar-item">
-              <Link 
-                to="/admin" 
-                className={`navbar-link ${location.pathname === '/admin' ? 'active' : ''}`}
-              >
-                Administracion
+            <li>
+              <Link to="/login" className="navbar-link">
+                Iniciar sesión
               </Link>
             </li>
           </ul>
         </div>
+
+        <button
+          className={`navbar-toggle${menuOpen ? ' active' : ''}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Abrir menú"
+        >
+          <span className="toggle-line"></span>
+          <span className="toggle-line"></span>
+          <span className="toggle-line"></span>
+        </button>
       </div>
     </nav>
   );

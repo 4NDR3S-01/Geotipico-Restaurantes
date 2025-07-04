@@ -19,8 +19,8 @@
   /* Utilidades */
   --border-color: #e0e0e0;
   --input-bg: #ffffff;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  --radius: 8px;
+  --shadow: 0 4px 12px rgba(0, 150, 199, 0.08);
+  --radius: 12px;
   
   /* Mapa */
   --map-border: #e0e0e0;
@@ -52,7 +52,7 @@
   /* Utilidades */
   --border-color: #44475A;
   --input-bg: #363846;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --shadow: 0 4px 12px rgba(0, 150, 199, 0.18);
   
   /* Mapa */
   --map-border: #44475A;

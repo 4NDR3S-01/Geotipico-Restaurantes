@@ -4,13 +4,12 @@ import { ToastContainer } from 'react-toastify';
 
 // Componentes
 import Navbar from './components/layout/Navbar';
-import ProtectedRoute from './components/auth/ProtectedRoute';
 
 // Páginas
 import Mapa from './pages/Mapa';
 import About from './pages/About';
-import Admin from './pages/Admin';
 import NotFound from './pages/NotFound';
+import AdminLogin from './components/auth/AdminLogin';
 
 // Estilos
 import 'react-toastify/dist/ReactToastify.css';
@@ -37,11 +36,7 @@ function App() {
             <Route path="/" element={<Navigate to="/mapa" />} />
             <Route path="/mapa" element={<Mapa />} />
             <Route path="/about" element={<About />} />
-            <Route path="/admin" element={
-              <ProtectedRoute>
-                <Admin />
-              </ProtectedRoute>
-            } />
+            <Route path="/login" element={<AdminLogin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

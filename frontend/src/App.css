@@ -274,34 +274,6 @@ p {
 }
 
 /* Mejora mapa en tema oscuro */
-[data-theme="dark"] .leaflet-container {
-  filter: brightness(0.9) contrast(1.1);
-}
-
 [data-theme="dark"] .map-container {
   border-color: var(--map-border);
-}
-
-/* Mejora popups en tema oscuro */
-[data-theme="dark"] .leaflet-popup-content-wrapper,
-[data-theme="dark"] .leaflet-popup-tip {
-  background-color: var(--popup-bg);
-  color: var(--text-color);
-}
-
-[data-theme="dark"] .popup-content h3 {
-  background: linear-gradient(135deg, var(--primary-color), #005a73);
-}
-
-[data-theme="dark"] .popup-details {
-  color: #dddddd;
-}
-
-[data-theme="dark"] .popup-actions {
-  border-top-color: #44475A;
-}
-
-/* Mejora la legibilidad de la navegación en modo oscuro */
-[data-theme="dark"] .navbar-link {
-  color: var(--light-text);
 }
