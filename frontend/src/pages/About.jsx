@@ -1,4 +1,3 @@
-
 import React from 'react';
 import '../styles/About.css';
 import { useTranslation } from 'react-i18next';
@@ -47,7 +46,7 @@ const About = () => {
           <h2>{t('about.sources_title')}</h2>
           <p>{t('about.sources_desc')}</p>
           <div className="attribution">
-            <a href="https://www.openstreetmap.org/about" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">
               {t('about.attribution')}
             </a>
           </div>

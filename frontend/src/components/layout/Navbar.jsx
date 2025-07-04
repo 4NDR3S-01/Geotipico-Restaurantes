@@ -51,17 +51,17 @@ const Navbar = () => {
           <ul className="navbar-list">
             <li>
               <Link to="/mapa" className="navbar-link">
-                {t('navbar.map')}
+                <span role="img" aria-label="mapa" style={{marginRight:6}}>🗺️</span>{t('navbar.map')}
               </Link>
             </li>
             <li>
               <Link to="/about" className="navbar-link">
-                {t('navbar.about')}
+                <span role="img" aria-label="about" style={{marginRight:6}}>ℹ️</span>{t('navbar.about')}
               </Link>
             </li>
             <li>
               <Link to="/login" className="navbar-link">
-                {t('navbar.login')}
+                <span role="img" aria-label="login" style={{marginRight:6}}>🔑</span>{t('navbar.login')}
               </Link>
             </li>
           </ul>

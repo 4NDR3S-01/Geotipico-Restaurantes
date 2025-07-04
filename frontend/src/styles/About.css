@@ -2,11 +2,12 @@
 .about-container {
   max-width: 900px;
   margin: 2.5rem auto 2rem auto;
-  background: var(--background-panel, rgba(40,42,54,0.97));
+  background: var(--card-bg);
   border-radius: 22px;
-  box-shadow: 0 4px 32px rgba(0,150,199,0.10);
+  box-shadow: var(--shadow);
   padding: 2.5rem 2.2rem 2rem 2.2rem;
   color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
 }
 
 .about-header {
@@ -19,11 +20,14 @@
   font-weight: 800;
   color: var(--primary-color);
   margin-bottom: 0.5rem;
+  letter-spacing: -1px;
+  text-shadow: 0 2px 8px rgba(0,150,199,0.07);
 }
 
 .about-header .subtitle {
   font-size: 1.15rem;
   color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .about-content {
@@ -37,6 +41,7 @@
   font-weight: 700;
   color: var(--primary-color);
   margin-bottom: 0.7rem;
+  letter-spacing: -0.5px;
 }
 
 .features-grid {
@@ -47,7 +52,7 @@
 }
 
 .feature-card {
-  background: var(--background-color, #23243a);
+  background: var(--background-light);
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(0,150,199,0.07);
   padding: 1.2rem 1rem 1.1rem 1rem;
@@ -56,11 +61,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: background 0.3s, color 0.3s;
 }
 
 .feature-icon {
   font-size: 2.1rem;
   margin-bottom: 0.5rem;
+  filter: drop-shadow(0 2px 6px rgba(0,150,199,0.10));
 }
 
 .attribution {
@@ -79,9 +86,10 @@
   font-weight: 700;
   text-decoration: none;
   transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(0,150,199,0.10);
 }
 .contact-button:hover {
-  background: #0077b6;
+  background: var(--primary-color-dark);
 }
 
 @media (max-width: 700px) {

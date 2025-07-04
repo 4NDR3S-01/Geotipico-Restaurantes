@@ -40,8 +40,8 @@
     "feature_responsive": "Diseño Responsivo",
     "feature_responsive_desc": "Accede a Geotípico desde cualquier dispositivo, con una experiencia optimizada para móviles y tablets.",
     "sources_title": "Fuentes de Datos",
-    "sources_desc": "Geotípico utiliza datos de OpenStreetMap, una plataforma colaborativa de mapas libres y editables. Además, complementamos esta información con datos recopilados de forma manual para asegurar la calidad y relevancia de nuestra base de datos.",
-    "attribution": "© OpenStreetMap contributors",
+    "sources_desc": "Geotípico utiliza datos de Google Maps, una plataforma de mapa.",
+    "attribution": "© Google Maps contributors",
     "contact_title": "Contáctanos",
     "contact_desc": "¿Tienes sugerencias, comentarios o quieres añadir tu restaurante? Estaremos encantados de escucharte.",
     "contact_button": "Envíanos un mensaje"
