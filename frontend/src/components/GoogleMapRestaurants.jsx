@@ -5,7 +5,7 @@ const center = { lat: -0.9676533, lng: -80.7089101 };
 const mapContainerStyle = { width: '100%', height: '100%' };
 const libraries = ['places'];
 
-const GOOGLE_MAPS_API_KEY = 'AIzaSyAIrtln0pwHXdiMpMWADC0qm6Ue5ARNoZ8';
+const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
 export default function GoogleMapRestaurants({ search, category = 'restaurant' }) {
   const { isLoaded, loadError } = useLoadScript({

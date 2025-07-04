@@ -1,0 +1,11 @@
+{
+  "navbar": {
+    "map": "Map",
+    "about": "About",
+    "login": "Login"
+  },
+  "filter": {
+    "search_placeholder": "Search restaurant or type...",
+    "type_label": "Food type"
+  }
+}

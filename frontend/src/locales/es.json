@@ -1,0 +1,11 @@
+{
+  "navbar": {
+    "map": "Mapa",
+    "about": "Acerca de",
+    "login": "Iniciar sesión"
+  },
+  "filter": {
+    "search_placeholder": "Buscar restaurante o tipo...",
+    "type_label": "Tipo de comida"
+  }
+}
