@@ -46,35 +46,8 @@ const Navbar = () => {
           <span className="navbar-logo-text">Geotípico</span>
         </Link>
 
-        <div className="navbar-actions" style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
-          {/* Selector de idioma */}
-          <select
-            className="lang-select"
-            value={language}
-            onChange={handleLanguageChange}
-            aria-label="Cambiar idioma"
-            style={{
-              border: 'none',
-              background: 'transparent',
-              fontWeight: 600,
-              fontSize: '1rem',
-              color: 'var(--text-color)',
-              cursor: 'pointer',
-              outline: 'none',
-              marginRight: '0.2rem',
-              padding: '0.3rem 0.7rem',
-              borderRadius: '8px',
-              transition: 'background 0.2s',
-            }}
-          >
-            <option value="es">ES</option>
-            <option value="en">EN</option>
-          </select>
-          {/* Botón de tema */}
-          <ThemeToggle />
-        </div>
 
-        <div className={`navbar-menu${menuOpen ? ' active' : ''}`}>
+        <div className={`navbar-menu${menuOpen ? ' active' : ''}`}> 
           <ul className="navbar-list">
             <li>
               <Link to="/mapa" className="navbar-link">
@@ -92,6 +65,18 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
+          <div className="navbar-utils">
+            <select
+              className="lang-select"
+              value={language}
+              onChange={handleLanguageChange}
+              aria-label="Cambiar idioma"
+            >
+              <option value="es">ES</option>
+              <option value="en">EN</option>
+            </select>
+            <ThemeToggle />
+          </div>
         </div>
 
         <button
