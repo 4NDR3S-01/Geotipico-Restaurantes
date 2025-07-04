@@ -1,0 +1,94 @@
+/* Estilos modernos y responsivos para la página About */
+.about-container {
+  max-width: 900px;
+  margin: 2.5rem auto 2rem auto;
+  background: var(--background-panel, rgba(40,42,54,0.97));
+  border-radius: 22px;
+  box-shadow: 0 4px 32px rgba(0,150,199,0.10);
+  padding: 2.5rem 2.2rem 2rem 2.2rem;
+  color: var(--text-color);
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 2.2rem;
+}
+
+.about-header h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.about-header .subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+
+.about-section h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.7rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+.feature-card {
+  background: var(--background-color, #23243a);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,150,199,0.07);
+  padding: 1.2rem 1rem 1.1rem 1rem;
+  text-align: center;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feature-icon {
+  font-size: 2.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.attribution {
+  margin-top: 0.7rem;
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+}
+
+.contact-button {
+  display: inline-block;
+  margin-top: 0.7rem;
+  padding: 0.6rem 1.3rem;
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.contact-button:hover {
+  background: #0077b6;
+}
+
+@media (max-width: 700px) {
+  .about-container {
+    padding: 1.2rem 0.5rem;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}

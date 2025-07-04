@@ -1,13 +1,18 @@
+
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { useTranslation } from 'react-i18next';
+
+// Import your Google Maps API key from environment variables
+const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const center = { lat: -0.9676533, lng: -80.7089101 };
 const mapContainerStyle = { width: '100%', height: '100%' };
 const libraries = ['places'];
 
-const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
 export default function GoogleMapRestaurants({ search, category = 'restaurant' }) {
+  const { t } = useTranslation();
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: GOOGLE_MAPS_API_KEY,
     libraries
@@ -50,8 +55,8 @@ export default function GoogleMapRestaurants({ search, category = 'restaurant' }
     });
   }, [search, mapReady, category]);
 
-  if (loadError) return <div>Error cargando el mapa</div>;
-  if (!isLoaded) return <div>Cargando mapa...</div>;
+  if (loadError) return <div>{t('map.error')}</div>;
+  if (!isLoaded) return <div>{t('map.loading')}</div>;
 
   // Estilos popup modernos y adaptativos
   const popupStyle = {
@@ -128,7 +133,7 @@ export default function GoogleMapRestaurants({ search, category = 'restaurant' }
       </GoogleMap>
       {/* Mensaje amigable si no hay resultados */}
       {!apiError && places && places.length === 0 && (
-        <div style={{textAlign:'center',marginTop:24,color:'#888'}}>No se encontraron lugares en la zona o con ese criterio.</div>
+        <div style={{textAlign:'center',marginTop:24,color:'#888'}}>{t('map.no_results')}</div>
       )}
     </div>
   );

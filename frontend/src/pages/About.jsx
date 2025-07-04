@@ -1,91 +1,62 @@
+
 import React from 'react';
+import '../styles/About.css';
+import { useTranslation } from 'react-i18next';
+
 
 const About = () => {
+  const { t } = useTranslation();
   return (
     <div className="about-container">
       <div className="about-header">
-        <h1>Acerca de Geotípico</h1>
-        <p className="subtitle">Descubriendo la gastronomía local de Manta</p>
+        <h1>{t('about.title')}</h1>
+        <p className="subtitle">{t('about.subtitle')}</p>
       </div>
-      
       <div className="about-content">
         <section className="about-section">
-          <h2>Nuestra Misión</h2>
-          <p>
-            Geotípico nace con la misión de promover y destacar la rica gastronomía 
-            de Manta, ayudando tanto a turistas como a locales a descubrir los mejores 
-            restaurantes y platos típicos de la región.
-          </p>
-          <p>
-            Queremos poner en valor la cultura culinaria manabita, facilitando el 
-            acceso a información geolocalizada sobre restaurantes y sus especialidades.
-          </p>
+          <h2>{t('about.mission_title')}</h2>
+          <p>{t('about.mission_1')}</p>
+          <p>{t('about.mission_2')}</p>
         </section>
-        
         <section className="about-section">
-          <h2>Características</h2>
+          <h2>{t('about.features_title')}</h2>
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon">🗺️</div>
-              <h3>Mapa Interactivo</h3>
-              <p>
-                Explora restaurantes en un mapa interactivo que te permite 
-                visualizar opciones cercanas a tu ubicación.
-              </p>
+              <h3>{t('about.feature_map')}</h3>
+              <p>{t('about.feature_map_desc')}</p>
             </div>
-            
             <div className="feature-card">
               <div className="feature-icon">🔍</div>
-              <h3>Filtros Avanzados</h3>
-              <p>
-                Encuentra exactamente lo que buscas con filtros por especialidad, 
-                rango de precios y calificación.
-              </p>
+              <h3>{t('about.feature_filters')}</h3>
+              <p>{t('about.feature_filters_desc')}</p>
             </div>
-            
             <div className="feature-card">
               <div className="feature-icon">🍽️</div>
-              <h3>Gastronomía Local</h3>
-              <p>
-                Descubre platos típicos manabitas y los mejores restaurantes para 
-                disfrutar de la cocina local.
-              </p>
+              <h3>{t('about.feature_gastronomy')}</h3>
+              <p>{t('about.feature_gastronomy_desc')}</p>
             </div>
-            
             <div className="feature-card">
               <div className="feature-icon">📱</div>
-              <h3>Diseño Responsivo</h3>
-              <p>
-                Accede a Geotípico desde cualquier dispositivo, con una experiencia 
-                optimizada para móviles y tablets.
-              </p>
+              <h3>{t('about.feature_responsive')}</h3>
+              <p>{t('about.feature_responsive_desc')}</p>
             </div>
           </div>
         </section>
-        
         <section className="about-section">
-          <h2>Fuentes de Datos</h2>
-          <p>
-            Geotípico utiliza datos de OpenStreetMap, una plataforma colaborativa 
-            de mapas libres y editables. Además, complementamos esta información 
-            con datos recopilados de forma manual para asegurar la calidad y 
-            relevancia de nuestra base de datos.
-          </p>
+          <h2>{t('about.sources_title')}</h2>
+          <p>{t('about.sources_desc')}</p>
           <div className="attribution">
             <a href="https://www.openstreetmap.org/about" target="_blank" rel="noopener noreferrer">
-              © OpenStreetMap contributors
+              {t('about.attribution')}
             </a>
           </div>
         </section>
-        
         <section className="about-section">
-          <h2>Contáctanos</h2>
-          <p>
-            ¿Tienes sugerencias, comentarios o quieres añadir tu restaurante? 
-            Estaremos encantados de escucharte.
-          </p>
+          <h2>{t('about.contact_title')}</h2>
+          <p>{t('about.contact_desc')}</p>
           <a href="mailto:contacto@geotipico.com" className="contact-button">
-            Envíanos un mensaje
+            {t('about.contact_button')}
           </a>
         </section>
       </div>

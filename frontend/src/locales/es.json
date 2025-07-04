@@ -5,7 +5,64 @@
     "login": "Iniciar sesión"
   },
   "filter": {
-    "search_placeholder": "Buscar restaurante o tipo...",
-    "type_label": "Tipo de comida"
+    "title": "Filtrar lugares",
+    "name_label": "Nombre",
+    "search_placeholder": "Buscar por nombre de {{type}}",
+    "type_label": "Tipo",
+    "restaurant": "Restaurantes",
+    "bar": "Bares",
+    "cafe": "Cafeterías",
+    "bakery": "Panaderías",
+    "popular": "Populares:",
+    "history": "Historial:",
+    "loading": "Cargando..."
+  },
+  "map": {
+    "title": "Restaurantes de Manta",
+    "subtitle": "Explora la gastronomía costera ecuatoriana",
+    "no_results": "No se encontraron lugares en la zona o con ese criterio.",
+    "error": "Error cargando el mapa",
+    "loading": "Cargando mapa..."
+  },
+  "about": {
+    "title": "Acerca de Geotípico",
+    "subtitle": "Descubriendo la gastronomía local de Manta",
+    "mission_title": "Nuestra Misión",
+    "mission_1": "Geotípico nace con la misión de promover y destacar la rica gastronomía de Manta, ayudando tanto a turistas como a locales a descubrir los mejores restaurantes y platos típicos de la región.",
+    "mission_2": "Queremos poner en valor la cultura culinaria manabita, facilitando el acceso a información geolocalizada sobre restaurantes y sus especialidades.",
+    "features_title": "Características",
+    "feature_map": "Mapa Interactivo",
+    "feature_map_desc": "Explora restaurantes en un mapa interactivo que te permite visualizar opciones cercanas a tu ubicación.",
+    "feature_filters": "Filtros Avanzados",
+    "feature_filters_desc": "Encuentra exactamente lo que buscas con filtros por especialidad, rango de precios y calificación.",
+    "feature_gastronomy": "Gastronomía Local",
+    "feature_gastronomy_desc": "Descubre platos típicos manabitas y los mejores restaurantes para disfrutar de la cocina local.",
+    "feature_responsive": "Diseño Responsivo",
+    "feature_responsive_desc": "Accede a Geotípico desde cualquier dispositivo, con una experiencia optimizada para móviles y tablets.",
+    "sources_title": "Fuentes de Datos",
+    "sources_desc": "Geotípico utiliza datos de OpenStreetMap, una plataforma colaborativa de mapas libres y editables. Además, complementamos esta información con datos recopilados de forma manual para asegurar la calidad y relevancia de nuestra base de datos.",
+    "attribution": "© OpenStreetMap contributors",
+    "contact_title": "Contáctanos",
+    "contact_desc": "¿Tienes sugerencias, comentarios o quieres añadir tu restaurante? Estaremos encantados de escucharte.",
+    "contact_button": "Envíanos un mensaje"
+  },
+  "notfound": {
+    "title": "404",
+    "subtitle": "Página no encontrada",
+    "desc": "Lo sentimos, no pudimos encontrar la página que estás buscando.",
+    "suggestion": "¿Te gustaría volver a explorar los restaurantes de Manta?",
+    "back_map": "Volver al mapa",
+    "about": "Acerca de Geotípico"
+  },
+  "admin": {
+    "title": "🔒 Área Restringida",
+    "subtitle": "Panel de administración de Geotípico",
+    "password_label": "Contraseña de administrador:",
+    "placeholder": "Ingresa la contraseña",
+    "button": "Iniciar sesión",
+    "verifying": "Verificando...",
+    "footer": "Esta área es solo para administradores del sitio.",
+    "not_admin": "Si no eres administrador, por favor ",
+    "back_map": "vuelve al mapa"
   }
 }

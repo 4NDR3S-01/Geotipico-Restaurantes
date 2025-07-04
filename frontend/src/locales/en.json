@@ -5,7 +5,64 @@
     "login": "Login"
   },
   "filter": {
-    "search_placeholder": "Search restaurant or type...",
-    "type_label": "Food type"
+    "title": "Filter places",
+    "name_label": "Name",
+    "search_placeholder": "Search by {{type}} name",
+    "type_label": "Type",
+    "restaurant": "Restaurants",
+    "bar": "Bars",
+    "cafe": "Cafés",
+    "bakery": "Bakeries",
+    "popular": "Popular:",
+    "history": "History:",
+    "loading": "Loading..."
+  },
+  "map": {
+    "title": "Restaurants in Manta",
+    "subtitle": "Explore the coastal Ecuadorian gastronomy",
+    "no_results": "No places found in the area or with that criteria.",
+    "error": "Error loading map",
+    "loading": "Loading map..."
+  },
+  "about": {
+    "title": "About Geotípico",
+    "subtitle": "Discovering Manta's local gastronomy",
+    "mission_title": "Our Mission",
+    "mission_1": "Geotípico was born with the mission of promoting and highlighting the rich gastronomy of Manta, helping both tourists and locals discover the best restaurants and typical dishes of the region.",
+    "mission_2": "We want to value Manabita culinary culture, making it easier to access geolocated information about restaurants and their specialties.",
+    "features_title": "Features",
+    "feature_map": "Interactive Map",
+    "feature_map_desc": "Explore restaurants on an interactive map that lets you see options near your location.",
+    "feature_filters": "Advanced Filters",
+    "feature_filters_desc": "Find exactly what you are looking for with filters by specialty, price range, and rating.",
+    "feature_gastronomy": "Local Gastronomy",
+    "feature_gastronomy_desc": "Discover typical Manabita dishes and the best restaurants to enjoy local cuisine.",
+    "feature_responsive": "Responsive Design",
+    "feature_responsive_desc": "Access Geotípico from any device, with an experience optimized for mobiles and tablets.",
+    "sources_title": "Data Sources",
+    "sources_desc": "Geotípico uses data from OpenStreetMap, a collaborative platform of free and editable maps. We also complement this information with manually collected data to ensure the quality and relevance of our database.",
+    "attribution": "© OpenStreetMap contributors",
+    "contact_title": "Contact us",
+    "contact_desc": "Do you have suggestions, comments or want to add your restaurant? We would love to hear from you.",
+    "contact_button": "Send us a message"
+  },
+  "notfound": {
+    "title": "404",
+    "subtitle": "Page not found",
+    "desc": "Sorry, we couldn't find the page you are looking for.",
+    "suggestion": "Would you like to explore Manta's restaurants again?",
+    "back_map": "Back to map",
+    "about": "About Geotípico"
+  },
+  "admin": {
+    "title": "🔒 Restricted Area",
+    "subtitle": "Geotípico admin panel",
+    "password_label": "Admin password:",
+    "placeholder": "Enter the password",
+    "button": "Login",
+    "verifying": "Verifying...",
+    "footer": "This area is for site administrators only.",
+    "not_admin": "If you are not an admin, please ",
+    "back_map": "go back to the map"
   }
 }
