@@ -98,7 +98,7 @@ const FilterPanel = ({ search, setSearch, category, setCategory, loading }) => {
         {/* Sugerencias populares */}
         {category === 'restaurant' && (
           <div style={{ marginTop: '0.7rem' }}>
-            <div style={{ fontSize: '0.98rem', color: 'var(--text-secondary)', marginBottom: 4 }}>Populares:</div>
+            <div style={{ fontSize: '0.98rem', color: 'var(--text-secondary)', marginBottom: 4 }}>Historial:</div>
             <ul className="popular-list">
               {POPULAR_RESTAURANTS.map((name) => (
                 <li key={name}>
