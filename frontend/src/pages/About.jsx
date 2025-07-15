@@ -2,7 +2,6 @@ import React from 'react';
 import '../styles/About.css';
 import { useTranslation } from 'react-i18next';
 
-
 const About = () => {
   const { t } = useTranslation();
   return (
@@ -21,11 +20,6 @@ const About = () => {
           <h2>{t('about.features_title')}</h2>
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon">🗺️</div>
-              <h3>{t('about.feature_map')}</h3>
-              <p>{t('about.feature_map_desc')}</p>
-            </div>
-            <div className="feature-card">
               <div className="feature-icon">🔍</div>
               <h3>{t('about.feature_filters')}</h3>
               <p>{t('about.feature_filters_desc')}</p>
@@ -39,6 +33,11 @@ const About = () => {
               <div className="feature-icon">📱</div>
               <h3>{t('about.feature_responsive')}</h3>
               <p>{t('about.feature_responsive_desc')}</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">🗺️</div>
+              <h3>{t('about.feature_map')}</h3>
+              <p>{t('about.feature_map_desc')}</p>
             </div>
           </div>
         </section>
@@ -54,7 +53,7 @@ const About = () => {
         <section className="about-section">
           <h2>{t('about.contact_title')}</h2>
           <p>{t('about.contact_desc')}</p>
-          <a href="mailto:contacto@geotipico.com" className="contact-button">
+          <a href="/contact" className="contact-button">
             {t('about.contact_button')}
           </a>
         </section>
