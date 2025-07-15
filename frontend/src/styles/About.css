@@ -181,11 +181,20 @@
     margin: 0 auto;
     border-radius: 10px;
     padding: 0.7rem 4vw !important;
-    box-shadow: 0 2px 8px rgba(0,150,199,0.08);
-    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    width: 100vw;
+    min-width: 0;
+    overflow-x: hidden;
   }
   .about-header {
     margin-bottom: 1.5rem;
+  }
+  .about-content {
+    gap: 1.1rem;
+    width: 100vw;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
   .about-header h1 {
     font-size: 1.1rem;
@@ -201,6 +210,10 @@
     box-shadow: 0 1px 4px rgba(0,150,199,0.07);
     border-width: 1px;
     margin-bottom: 1.1rem;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
   .about-section h2 {
     font-size: 1rem;
@@ -212,6 +225,10 @@
   .features-grid {
     gap: 12px;
     margin-top: 14px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
   .feature-card {
     font-size: 0.9rem;
@@ -220,6 +237,10 @@
     box-shadow: 0 1px 4px rgba(0,150,199,0.07);
     border-width: 1px;
     margin-bottom: 8px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
   .feature-icon {
     font-size: 1.1rem;

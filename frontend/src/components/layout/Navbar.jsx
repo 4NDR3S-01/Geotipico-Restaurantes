@@ -72,7 +72,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link to="/login" className="navbar-link">
-                <span role="img" aria-label="login" style={{marginRight:6}}>🔑</span>{t('navbar.login', 'Iniciar sesión')}
+                <span role="img" aria-label="login" style={{marginRight:6}}>👤</span>{t('navbar.login', 'Iniciar sesión')}
               </Link>
             </li>
           </ul>

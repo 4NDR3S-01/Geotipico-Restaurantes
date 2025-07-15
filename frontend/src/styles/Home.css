@@ -2,12 +2,12 @@
 
 .home-bg {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--background-light) 0%, var(--background-color) 100%);
-  padding: 2rem 0;
+  background: none;
+  padding: 48px 0 32px 0;
   transition: background 0.3s;
 }
 [data-theme="dark"] .home-bg {
-  background: linear-gradient(135deg, #23243a 0%, #282a36 100%);
+  background: none;
 }
 
 .home-container {
@@ -239,17 +239,30 @@
     margin: 0 auto;
     border-radius: 10px;
     padding: 0.7rem 4vw !important;
-    box-shadow: 0 2px 8px rgba(0,150,199,0.08);
-    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    width: 100vw;
+    min-width: 0;
+    overflow-x: hidden;
   }
   .home-header {
     margin-bottom: 1.5rem;
   }
   .home-content {
     gap: 1.1rem;
+    width: 100vw;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
   .home-section, .home-cta-section, .home-values-section {
     margin-bottom: 1.1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,150,199,0.07);
+    border-width: 1px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
   .home-values-list {
     gap: 12px !important;

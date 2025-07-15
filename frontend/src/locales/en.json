@@ -54,7 +54,7 @@
     "subtitle": "Page not found",
     "desc": "Sorry, we couldn't find the page you are looking for.",
     "suggestion": "Would you like to explore Manta's restaurants again?",
-    "back_map": "Back to map",
+    "back_map": "Back to home",
     "about": "About Geotípico"
   },
   "admin": {
@@ -184,5 +184,43 @@
     "error_subject": "Please enter a subject.",
     "error_message": "Please write your message.",
     "info_title": "Other ways to contact us"
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "email_placeholder": "Your email",
+    "password": "Password",
+    "password_placeholder": "Your password",
+    "button": "Login",
+    "loading": "Logging in...",
+    "error_invalid": "Invalid credentials",
+    "error_network": "Network error. Try again later.",
+    "no_account": "Don't have an account? Register",
+    "forgot": "Forgot your password?",
+    "recover_soon": "Password recovery coming soon.",
+    "show_password": "Show password",
+    "hide_password": "Hide password"
+  },
+  "register": {
+    "title": "Create Account",
+    "aria": "User registration",
+    "first_name": "First Name",
+    "first_name_placeholder": "Your first name",
+    "last_name": "Last Name",
+    "last_name_placeholder": "Your last name",
+    "email": "Email",
+    "email_placeholder": "Your email",
+    "password": "Password",
+    "password_placeholder": "Create a password",
+    "confirm_password": "Confirm Password",
+    "confirm_password_placeholder": "Repeat your password",
+    "button": "Register",
+    "loading": "Registering...",
+    "login_link": "Already have an account? Log in",
+    "hide_password": "Hide password",
+    "show_password": "Show password",
+    "success": "Registration successful. You can now log in.",
+    "error_name": "Please enter your first and last name.",
+    "error_password_match": "Passwords do not match"
   }
 }

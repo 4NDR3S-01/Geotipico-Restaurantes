@@ -54,7 +54,7 @@
     "subtitle": "Página no encontrada",
     "desc": "Lo sentimos, no pudimos encontrar la página que estás buscando.",
     "suggestion": "¿Te gustaría volver a explorar los restaurantes de Manta?",
-    "back_map": "Volver al mapa",
+    "back_map": "Volver al inicio",
     "about": "Acerca de Geotípico"
   },
   "admin": {
@@ -184,5 +184,43 @@
     "error_subject": "Por favor ingresa un asunto.",
     "error_message": "Por favor escribe tu mensaje.",
     "info_title": "Otras formas de contacto"
+  },
+  "login": {
+    "title": "Iniciar Sesión",
+    "email": "Correo electrónico",
+    "email_placeholder": "Tu correo electrónico",
+    "password": "Contraseña",
+    "password_placeholder": "Tu contraseña",
+    "button": "Ingresar",
+    "loading": "Ingresando...",
+    "error_invalid": "Credenciales incorrectas",
+    "error_network": "Error de red. Intenta más tarde.",
+    "no_account": "¿No tienes cuenta? Regístrate",
+    "forgot": "¿Olvidaste tu contraseña?",
+    "recover_soon": "Funcionalidad de recuperación próximamente.",
+    "show_password": "Mostrar contraseña",
+    "hide_password": "Ocultar contraseña"
+  },
+  "register": {
+    "title": "Crear cuenta",
+    "aria": "Registro de usuario",
+    "first_name": "Nombre",
+    "first_name_placeholder": "Tu nombre",
+    "last_name": "Apellidos",
+    "last_name_placeholder": "Tus apellidos",
+    "email": "Correo electrónico",
+    "email_placeholder": "Tu correo electrónico",
+    "password": "Contraseña",
+    "password_placeholder": "Crea una contraseña",
+    "confirm_password": "Confirmar contraseña",
+    "confirm_password_placeholder": "Repite la contraseña",
+    "button": "Registrarse",
+    "loading": "Registrando...",
+    "login_link": "¿Ya tienes cuenta? Inicia sesión",
+    "hide_password": "Ocultar contraseña",
+    "show_password": "Mostrar contraseña",
+    "success": "Registro exitoso. Ahora puedes iniciar sesión.",
+    "error_name": "Por favor ingresa tu nombre y apellidos.",
+    "error_password_match": "Las contraseñas no coinciden"
   }
 }

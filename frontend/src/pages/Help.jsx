@@ -4,31 +4,6 @@ import '../styles/FAQ.css';
 import { faqData } from '../data/faqData';
 import { useLocation } from 'react-router-dom';
 
-// const categoryLabels = {
-//   general: 'General',
-//   cuenta: 'Cuenta',
-//   busqueda: 'Búsqueda',
-//   contacto: 'Contacto',
-//   soporte: 'Soporte',
-//   seguridad: 'Seguridad',
-//   privacidad: 'Privacidad',
-//   notificaciones: 'Notificaciones',
-//   costos: 'Costos',
-//   idioma: 'Idioma',
-//   contenido: 'Contenido',
-//   accesibilidad: 'Accesibilidad',
-//   movil: 'Móvil',
-//   aporte: 'Aporte',
-//   novedades: 'Novedades',
-//   correo: 'Correo',
-//   negocio: 'Negocio',
-//   reseñas: 'Reseñas',
-//   favoritos: 'Favoritos',
-//   mapa: 'Mapa',
-//   filtros: 'Filtros',
-//   comunidad: 'Comunidad',
-// };
-
 const grouped = faqData.reduce((acc, item) => {
   if (!acc[item.category]) acc[item.category] = [];
   acc[item.category].push(item);
@@ -92,10 +67,9 @@ const Help = () => {
               <span className="faq-category-label">{t(`faq.cat_${cat}`, cat)}</span>
               <span className="faq-category-arrow" aria-hidden="true">{openCategory === cat ? '▲' : '▼'}</span>
             </button>
-            <div
+            <section
               className="faq-category-panel"
               id={`faq-cat-panel-${cat}`}
-              role="region"
               aria-labelledby={`faq-cat-header-${cat}`}
               style={{ display: openCategory === cat ? 'block' : 'none' }}
             >
@@ -113,18 +87,17 @@ const Help = () => {
                     <span className="faq-q-text">{t(item.q)}</span>
                     <span className="faq-arrow" aria-hidden="true">{openIndex === idx && openCategory === cat ? '▲' : '▼'}</span>
                   </button>
-                  <div
+                  <section
                     className="faq-answer"
                     id={`faq-panel-${cat}-${idx}`}
-                    role="region"
                     aria-labelledby={`faq-header-${cat}-${idx}`}
                     style={{ display: openIndex === idx && openCategory === cat ? 'block' : 'none' }}
                   >
                     {t(item.a)}
-                  </div>
+                  </section>
                 </div>
               ))}
-            </div>
+            </section>
           </div>
         ))}
       </div>

@@ -1,12 +1,12 @@
 /* Contact.css - Estilos modernos para la página de contacto */
 
 .contact-container {
-  max-width: 1280px;
+  max-width: 1440px;
   margin: 2.5rem auto 2rem auto;
-  background: rgba(255,255,255,0.92);
-  border-radius: 32px;
-  box-shadow: 0 4px 32px rgba(0,150,199,0.13);
-  padding: 2.5rem 5vw 2.5rem 5vw;
+  background: rgba(255,255,255,0.95);
+  border-radius: 40px;
+  box-shadow: 0 8px 48px rgba(0,150,199,0.18);
+  padding: 3.5rem 4vw 3.5rem 4vw;
   color: var(--text-color);
   border: 1.5px solid var(--border-color);
   backdrop-filter: blur(8px);
@@ -70,12 +70,12 @@
 
 .contact-form {
   flex: 1 1 1000px;
-  max-width: 100%;
-  background: rgba(232,249,253,0.92);
-  border-radius: 18px;
-  box-shadow: 0 2px 8px rgba(0,150,199,0.08);
+  max-width: 600px;
+  background: rgba(232,249,253,0.97);
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0,150,199,0.13);
   border: 1.5px solid var(--border-color);
-  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  padding: 3rem 2.5rem 2.5rem 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -221,8 +221,10 @@
     margin: 0 auto;
     border-radius: 10px;
     padding: 0.7rem 4vw !important;
-    box-shadow: 0 2px 8px rgba(0,150,199,0.08);
-    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    width: 100vw;
+    min-width: 0;
+    overflow-x: hidden;
   }
   .contact-header {
     margin-bottom: 1.5rem;
@@ -238,6 +240,10 @@
   .contact-content {
     flex-direction: column;
     gap: 1.2rem;
+    width: 100vw;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
   .contact-content::before {
     display: none;
@@ -247,6 +253,10 @@
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0,150,199,0.07);
     border-width: 1px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
   .contact-form {
     max-width: 100%;

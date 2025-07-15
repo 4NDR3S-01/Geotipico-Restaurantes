@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/Contact.css';
 import { useTranslation } from 'react-i18next';
+import { sendContact } from '../api/contact';
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -32,21 +33,13 @@ const Contact = () => {
     }
     setLoading(true);
     setSent(false);
+    setErrors({});
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL || ''}/api/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form)
-      });
-      const data = await res.json();
-      if (res.ok && data.success) {
-        setSent(true);
-        setForm({ name: '', email: '', subject: '', message: '' });
-      } else {
-        setErrors({ server: data.error || 'Error al enviar. Intenta más tarde.' });
-      }
+      await sendContact(form);
+      setSent(true);
+      setForm({ name: '', email: '', subject: '', message: '' });
     } catch (err) {
-      setErrors({ server: 'Error de red. Intenta más tarde.' });
+      setErrors({ server: err.message });
     } finally {
       setLoading(false);
     }
