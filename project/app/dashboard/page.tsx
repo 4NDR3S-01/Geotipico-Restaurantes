@@ -107,8 +107,8 @@ export default function DashboardPage() {
           ),
         }));
 
-        // Sort by distance
-        restaurantsWithDistance.sort((a, b) => (a.distance || 0) - (b.distance || 0));
+        // Ordenar por distancia (tipado explícito)
+        restaurantsWithDistance.sort((a: Restaurant, b: Restaurant) => (a.distance || 0) - (b.distance || 0));
         
         setRestaurants(restaurantsWithDistance);
         

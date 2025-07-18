@@ -12,8 +12,9 @@ interface GoogleMapProps {
 
 export const GoogleMap = ({ restaurants, center, zoom = 14, onRestaurantClick }: GoogleMapProps) => {
   const mapRef = useRef<HTMLDivElement>(null);
-  const [map, setMap] = useState<google.maps.Map | null>(null);
+  const [map, setMap] = useState<any>(null); // Usar 'any' para evitar el error de espacio de nombres 'google'
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const markersRef = useRef<any[]>([]);
 
   // Default center to Manta, Ecuador
   const defaultCenter = { lat: -0.9526, lng: -80.7320 };
@@ -40,8 +41,8 @@ export const GoogleMap = ({ restaurants, center, zoom = 14, onRestaurantClick }:
       if (!mapRef.current) return;
 
       const mapCenter = center || userLocation || defaultCenter;
-      
-      const googleMap = new google.maps.Map(mapRef.current, {
+      const gmaps = (window as any).google.maps;
+      const googleMap = new gmaps.Map(mapRef.current, {
         center: mapCenter,
         zoom,
         styles: [
@@ -61,19 +62,19 @@ export const GoogleMap = ({ restaurants, center, zoom = 14, onRestaurantClick }:
 
       // Add user location marker
       if (userLocation) {
-        new google.maps.Marker({
+        new gmaps.Marker({
           position: userLocation,
           map: googleMap,
           icon: {
             url: '/api/placeholder/32/32',
-            scaledSize: new google.maps.Size(32, 32),
+            scaledSize: new gmaps.Size(32, 32),
           },
           title: 'Tu ubicación',
         });
       }
     };
 
-    if (window.google && window.google.maps) {
+    if ((window as any).google && (window as any).google.maps) {
       initMap();
     } else {
       const script = document.createElement('script');
@@ -88,22 +89,25 @@ export const GoogleMap = ({ restaurants, center, zoom = 14, onRestaurantClick }:
   useEffect(() => {
     if (!map) return;
 
-    // Clear existing markers
-    // (In a real implementation, you'd store markers in state to clear them)
+    // Limpiar marcadores anteriores
+    markersRef.current.forEach(marker => marker.setMap(null));
+    markersRef.current = [];
 
     // Add restaurant markers
     restaurants.forEach((restaurant) => {
-      const marker = new google.maps.Marker({
+      const gmaps = (window as any).google.maps;
+      const marker = new gmaps.Marker({
         position: { lat: restaurant.lat, lng: restaurant.lng },
         map,
         title: restaurant.name,
         icon: {
           url: '/api/placeholder/24/24',
-          scaledSize: new google.maps.Size(24, 24),
+          scaledSize: new gmaps.Size(24, 24),
         },
       });
+      markersRef.current.push(marker);
 
-      const infoWindow = new google.maps.InfoWindow({
+      const infoWindow = new gmaps.InfoWindow({
         content: `
           <div class="p-2">
             <h3 class="font-semibold">${restaurant.name}</h3>
@@ -122,7 +126,7 @@ export const GoogleMap = ({ restaurants, center, zoom = 14, onRestaurantClick }:
   }, [map, restaurants, onRestaurantClick]);
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full" role="region" aria-label="Mapa de restaurantes">
       <div ref={mapRef} className="w-full h-full rounded-lg" />
     </div>
   );
