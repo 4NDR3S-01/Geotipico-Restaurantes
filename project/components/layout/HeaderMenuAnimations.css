@@ -1,0 +1,43 @@
+/* Animación de aparición para el menú móvil */
+@keyframes fade-slide-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-slide-in {
+  animation: fade-slide-in 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Animación de subrayado deslizante en enlaces */
+.header-animated-link {
+  position: relative;
+  overflow: hidden;
+}
+.header-animated-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6, #14b8a6);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.header-animated-link:hover::after, .header-animated-link:focus::after {
+  transform: scaleX(1);
+}
+
+/* Animación de icono: escalado en hover/focus */
+.header-animated-link .h-4 {
+  transition: transform 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+.header-animated-link:hover .h-4, .header-animated-link:focus .h-4 {
+  transform: scale(1.18);
+} 
