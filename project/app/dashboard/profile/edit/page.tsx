@@ -25,6 +25,7 @@ export default function EditProfilePage() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [pendingSubmit, setPendingSubmit] = useState<null | (() => void)>(null);
   const [originalEmail, setOriginalEmail] = useState(user?.email || "");
+  const [noChanges, setNoChanges] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -64,11 +65,17 @@ export default function EditProfilePage() {
     e.preventDefault();
     setError("");
     setSuccess("");
+    setNoChanges(false);
     const nameErr = validateName(name);
     const emailErr = validateEmail(email);
     setNameError(nameErr);
     setEmailError(emailErr);
     if (nameErr || emailErr) return;
+    // Si no hay cambios, mostrar mensaje y no guardar
+    if (name === user?.name && email === user?.email) {
+      setNoChanges(true);
+      return;
+    }
     // Si el email cambió, pedir confirmación
     if (email !== originalEmail) {
       setShowConfirm(true);
@@ -138,6 +145,11 @@ export default function EditProfilePage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4" aria-labelledby="profile-edit-title" noValidate>
+            {noChanges && (
+              <Alert variant="default" role="status" aria-live="polite">
+                <AlertDescription>No se detectaron cambios para guardar.</AlertDescription>
+              </Alert>
+            )}
             {error && (
               <Alert variant="destructive" role="alert" aria-live="polite">
                 <AlertDescription>{error}</AlertDescription>
