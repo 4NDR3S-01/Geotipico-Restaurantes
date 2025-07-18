@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useAuth } from '@/contexts/AuthContext';
+import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -81,10 +82,28 @@ export default function EditProfilePage() {
   const doSubmit = async () => {
     setSaving(true);
     try {
-      // Aquí deberías hacer la petición a tu API para actualizar el usuario
-      // await updateUser({ name, email });
-      setSuccess("Perfil actualizado correctamente");
-      setOriginalEmail(email);
+      // Petición real al backend
+      const token = Cookies.get('token');
+      const response = await fetch('/api/auth/me', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ name, email }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setSuccess('Perfil actualizado correctamente');
+        setOriginalEmail(data.email);
+        // Actualizar usuario en el contexto
+        if (user) {
+          user.name = data.name;
+          user.email = data.email;
+        }
+      } else {
+        setError(data.error || 'Error al actualizar el perfil');
+      }
     } catch (err) {
       setError("Error al actualizar el perfil");
     } finally {
