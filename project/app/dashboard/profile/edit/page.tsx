@@ -12,7 +12,7 @@ import { User } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 
 export default function EditProfilePage() {
-  const { user, loading } = useAuth();
+  const { user, loading, fetchUser, logout } = useAuth();
   const router = useRouter();
   const [name, setName] = useState(user?.name || "");
   const [email, setEmail] = useState(user?.email || "");
@@ -89,7 +89,6 @@ export default function EditProfilePage() {
   const doSubmit = async () => {
     setSaving(true);
     try {
-      // Petición real al backend
       const token = Cookies.get('token');
       const response = await fetch('/api/auth/me', {
         method: 'PUT',
@@ -103,10 +102,17 @@ export default function EditProfilePage() {
       if (response.ok) {
         setSuccess('Perfil actualizado correctamente');
         setOriginalEmail(data.email);
-        // Actualizar usuario en el contexto
-        if (user) {
-          user.name = data.name;
-          user.email = data.email;
+        // Si el email cambió, forzar logout y pedir re-login
+        if (email !== user?.email) {
+          setTimeout(() => {
+            logout();
+            router.replace('/login');
+          }, 1500);
+          return;
+        }
+        // Refrescar el usuario globalmente
+        if (token) {
+          await fetchUser(token);
         }
       } else {
         setError(data.error || 'Error al actualizar el perfil');

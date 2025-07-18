@@ -62,6 +62,7 @@ export async function PUT(request: NextRequest) {
     }
     const token = authorization.split(' ')[1];
     const decoded = verifyToken(token);
+    console.log('PUT /api/auth/me - decoded userId:', decoded?.userId);
     if (!decoded) {
       return NextResponse.json(
         { error: 'Invalid token' },
@@ -78,6 +79,7 @@ export async function PUT(request: NextRequest) {
     const client = await clientPromise;
     const db = client.db('geotipico');
     const users = db.collection('users');
+    console.log('PUT /api/auth/me - query:', { _id: new ObjectId(decoded.userId) });
     // Verificar si el email ya existe en otro usuario
     const existing = await users.findOne({ email, _id: { $ne: new ObjectId(decoded.userId) } });
     if (existing) {
@@ -92,17 +94,23 @@ export async function PUT(request: NextRequest) {
       { $set: { name, email } },
       { returnDocument: 'after' }
     );
-    if (!result.value) {
+    console.log('PUT /api/auth/me - result:', result);
+    let updatedUser = result?.value;
+    if (!updatedUser) {
+      // Buscar manualmente si la actualización se realizó pero no se devolvió el usuario
+      updatedUser = await users.findOne({ _id: new ObjectId(decoded.userId) });
+    }
+    if (!updatedUser) {
       return NextResponse.json(
         { error: 'User not found' },
         { status: 404 }
       );
     }
     return NextResponse.json({
-      _id: result.value._id.toString(),
-      name: result.value.name,
-      email: result.value.email,
-      createdAt: result.value.createdAt,
+      _id: updatedUser._id.toString(),
+      name: updatedUser.name,
+      email: updatedUser.email,
+      createdAt: updatedUser.createdAt,
     });
   } catch (error) {
     console.error('Update user error:', error);
