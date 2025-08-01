@@ -118,6 +118,8 @@ const translations = {
     'home.title': 'Encuentra los Mejores Restaurantes en Manta',
     'home.subtitle': 'Descubre restaurantes cerca de ti con nuestra tecnología de geolocalización',
     'home.cta': 'Comenzar Ahora',
+    'home.features.title': 'Características principales',
+    'home.features.subtitle': 'Todo lo que necesitas para encontrar tu restaurante ideal en Manta',
     'search.placeholder': 'Buscar restaurantes...',
     'search.filters': 'Filtros',
     'map.loading': 'Cargando mapa...',
@@ -129,7 +131,7 @@ const translations = {
     'theme.light': 'Tema Claro',
     'theme.dark': 'Tema Oscuro',
     'language.spanish': 'Español',
-    'language.english': 'English',
+    'language.english': 'English'
   },
   en: {
     // Dashboard
@@ -229,6 +231,8 @@ const translations = {
     'home.title': 'Find the Best Restaurants in Manta',
     'home.subtitle': 'Discover restaurants near you with our geolocation technology',
     'home.cta': 'Get Started',
+    'home.features.title': 'Main Features',
+    'home.features.subtitle': 'Everything you need to find your ideal restaurant in Manta',
     'search.placeholder': 'Search restaurants...',
     'search.filters': 'Filters',
     'map.loading': 'Loading map...',
@@ -261,8 +265,15 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
 
 
   const contextValue = useMemo(() => {
-    const t = (key: string): string => {
-      return (translations[language] as Record<string, string>)[key] || key;
+    // Permite interpolar variables en las traducciones: t('key', { var: value })
+    const t = (key: string, vars?: Record<string, string | number>): string => {
+      let template = (translations[language] as Record<string, string>)[key] || key;
+      if (vars) {
+        Object.entries(vars).forEach(([k, v]) => {
+          template = template.replace(new RegExp(`{${k}}`, 'g'), String(v));
+        });
+      }
+      return template;
     };
     return {
       language,
