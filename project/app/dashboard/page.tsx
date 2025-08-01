@@ -67,8 +67,8 @@ export default function DashboardPage() {
           // Default to Manta center if geolocation fails
           setUserLocation({ lat: -0.9526, lng: -80.7320 });
           addNotification({
-            title: 'Ubicación no disponible',
-            message: 'Se utilizará la ubicación predeterminada de Manta',
+            title: t('dashboard.location.unavailable.title'),
+            message: t('dashboard.location.unavailable.message'),
             type: 'warning',
             read: false,
           });
@@ -77,8 +77,8 @@ export default function DashboardPage() {
     } else {
       setUserLocation({ lat: -0.9526, lng: -80.7320 });
       addNotification({
-        title: 'Geolocalización no soportada',
-        message: 'Tu navegador no soporta geolocalización',
+        title: t('dashboard.location.unsupported.title'),
+        message: t('dashboard.location.unsupported.message'),
         type: 'error',
         read: false,
       });
@@ -113,8 +113,8 @@ export default function DashboardPage() {
         setRestaurants(restaurantsWithDistance);
         
         addNotification({
-          title: 'Restaurantes cargados',
-          message: `Se encontraron ${restaurantsWithDistance.length} restaurantes cerca de ti`,
+          title: t('dashboard.restaurants.loaded.title'),
+          message: t('dashboard.restaurants.loaded.message'),
           type: 'success',
           read: false,
         });
@@ -122,8 +122,8 @@ export default function DashboardPage() {
     } catch (error) {
       console.error('Error fetching restaurants:', error);
       addNotification({
-        title: 'Error al cargar restaurantes',
-        message: 'No se pudieron cargar los restaurantes. Intenta nuevamente.',
+        title: t('dashboard.restaurants.error.title'),
+        message: t('dashboard.restaurants.error.message'),
         type: 'error',
         read: false,
       });
@@ -181,30 +181,31 @@ export default function DashboardPage() {
 
   if (authLoading || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center" role="status" aria-label="Cargando">
+      <div className="min-h-screen flex items-center justify-center" role="status" aria-label={t('dashboard.loading.aria')}>
         <Loader2 className="h-8 w-8 animate-spin" />
-        <span className="sr-only">Cargando dashboard...</span>
+        <span className="sr-only">{t('dashboard.loading')}</span>
       </div>
     );
   }
 
+  // Obtener la API key de Google Maps solo en build/SSR
+  const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
-      
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" role="main">
         <div className="sr-only">
-          <h1>Dashboard de Restaurantes</h1>
+          <h1>{t('dashboard.sr.title')}</h1>
         </div>
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            ¡Bienvenido, {user.name}!
+            {`${t('dashboard.welcome')} ${user.name || user.email}!`}
           </h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Descubre restaurantes increíbles cerca de ti
+            {t('dashboard.subtitle')}
           </p>
         </div>
-
         <div className="mb-6">
           <SearchBar
             onSearch={handleSearch}
@@ -212,19 +213,17 @@ export default function DashboardPage() {
             placeholder={t('search.placeholder')}
           />
         </div>
-
-        <Tabs defaultValue="map" className="w-full" aria-label="Vista de restaurantes">
+        <Tabs defaultValue="map" className="w-full" aria-label={t('dashboard.tabs.aria')}>
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="map" className="flex items-center space-x-2" aria-label="Vista de mapa">
+            <TabsTrigger value="map" className="flex items-center space-x-2" aria-label={t('dashboard.tabs.map.aria')}>
               <MapPin className="h-4 w-4" aria-hidden="true" />
-              <span>Mapa</span>
+              <span>{t('dashboard.tabs.map')}</span>
             </TabsTrigger>
-            <TabsTrigger value="list" className="flex items-center space-x-2" aria-label="Vista de lista">
+            <TabsTrigger value="list" className="flex items-center space-x-2" aria-label={t('dashboard.tabs.list.aria')}>
               <List className="h-4 w-4" aria-hidden="true" />
-              <span>Lista</span>
+              <span>{t('dashboard.tabs.list')}</span>
             </TabsTrigger>
           </TabsList>
-
           <TabsContent value="map" className="mt-6" role="tabpanel" aria-label="Panel de mapa">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[600px]">
               <div className="lg:col-span-2">
@@ -235,6 +234,7 @@ export default function DashboardPage() {
                         restaurants={filteredRestaurants}
                         center={userLocation}
                         onRestaurantClick={handleRestaurantClick}
+                        apiKey={googleMapsApiKey}
                       />
                     ) : (
                       <div className="flex items-center justify-center h-full" role="status" aria-label="Cargando mapa">
@@ -245,12 +245,11 @@ export default function DashboardPage() {
                   </CardContent>
                 </Card>
               </div>
-
               <aside className="space-y-4" aria-label="Panel lateral de información">
                 {selectedRestaurant && (
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-lg" id="selected-restaurant">Restaurante Seleccionado</CardTitle>
+                      <CardTitle className="text-lg" id="selected-restaurant">{t('dashboard.selected.title')}</CardTitle>
                     </CardHeader>
                     <CardContent aria-labelledby="selected-restaurant">
                       <RestaurantCard restaurant={selectedRestaurant} />
@@ -259,53 +258,46 @@ export default function DashboardPage() {
                 )}
 
                 <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg flex items-center justify-between" id="nearby-restaurants">
-                      Restaurantes Cerca
-                      <Badge variant="secondary" aria-label={`${filteredRestaurants.length} restaurantes encontrados`}>
-                        {filteredRestaurants.length}
-                      </Badge>
-                    </CardTitle>
-                  </CardHeader>
+                    <CardHeader>
+                      <CardTitle className="text-lg flex items-center justify-between" id="nearby-restaurants">
+                        {t('dashboard.nearby.title')}
+                        <Badge variant="secondary" aria-label={t('dashboard.nearby.count')}>
+                          {filteredRestaurants.length}
+                        </Badge>
+                      </CardTitle>
+                    </CardHeader>
                   <CardContent aria-labelledby="nearby-restaurants">
                     <ScrollArea className="h-[400px]" role="region" aria-label="Lista de restaurantes cercanos">
-                      {loading ? (
-                        <div className="flex items-center justify-center py-8" role="status" aria-label="Cargando restaurantes">
-                          <Loader2 className="h-6 w-6 animate-spin" />
-                          <span className="sr-only">Cargando restaurantes...</span>
-                        </div>
-                      ) : (
-                        <div className="space-y-3" role="list">
-                          {filteredRestaurants.slice(0, 5).map((restaurant) => (
-                            <div
-                              key={restaurant.id}
-                              className="p-3 border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                              onClick={() => handleRestaurantClick(restaurant)}
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                  e.preventDefault();
-                                  handleRestaurantClick(restaurant);
-                                }
-                              }}
-                              tabIndex={0}
-                              role="listitem button"
-                              aria-label={`Seleccionar ${restaurant.name}`}
-                            >
-                              <h4 className="font-medium" id={`restaurant-${restaurant.id}`}>{restaurant.name}</h4>
-                              <p className="text-sm text-gray-600 dark:text-gray-400">
-                                {restaurant.distance?.toFixed(1)} km {t('restaurant.distance')}
-                              </p>
+                          {loading ? (
+                            <div className="flex items-center justify-center py-8" role="status" aria-label={t('dashboard.loading.restaurants.aria')}>
+                              <Loader2 className="h-6 w-6 animate-spin" />
+                              <span className="sr-only">{t('dashboard.loading.restaurants')}</span>
                             </div>
-                          ))}
-                        </div>
-                      )}
+                          ) : (
+                            <div className="space-y-3" role="list">
+                              {filteredRestaurants.slice(0, 5).map((restaurant) => (
+                                <button
+                                  key={restaurant.id}
+                                  type="button"
+                                  className="p-3 border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 w-full text-left"
+                                  onClick={() => handleRestaurantClick(restaurant)}
+                                  aria-label={t('dashboard.select.restaurant')}
+                                  role="listitem"
+                                >
+                                  <h4 className="font-medium" id={`restaurant-${restaurant.id}`}>{restaurant.name}</h4>
+                                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                                    {restaurant.distance?.toFixed(1)} km {t('restaurant.distance')}
+                                  </p>
+                                </button>
+                              ))}
+                            </div>
+                          )}
                     </ScrollArea>
                   </CardContent>
                 </Card>
               </aside>
             </div>
           </TabsContent>
-
           <TabsContent value="list" className="mt-6" role="tabpanel" aria-label="Panel de lista">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="region" aria-label="Lista completa de restaurantes">
               {loading ? (
@@ -316,7 +308,7 @@ export default function DashboardPage() {
               ) : filteredRestaurants.length === 0 ? (
                 <div className="col-span-full text-center py-12" role="status">
                   <p className="text-gray-500 dark:text-gray-400">
-                    No se encontraron restaurantes con los filtros seleccionados
+                    {t('dashboard.noresults')}
                   </p>
                 </div>
               ) : (

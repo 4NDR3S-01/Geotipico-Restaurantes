@@ -31,20 +31,20 @@ export default function RegisterPage() {
 
   // Validación en tiempo real para nombre
   const validateName = (value: string) => {
-    if (!value) return 'El nombre es obligatorio';
+    if (!value) return t('register.error.name.required');
     return '';
   };
   // Validación en tiempo real para email
   const validateEmail = (value: string) => {
-    if (!value) return 'El email es obligatorio';
+    if (!value) return t('register.error.email.required');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(value)) return 'El email no es válido';
+    if (!emailRegex.test(value)) return t('register.error.email.invalid');
     return '';
   };
   // Validación en tiempo real para contraseña
   const validatePassword = (value: string) => {
-    if (!value) return 'La contraseña es obligatoria';
-    if (value.length < 6) return 'La contraseña debe tener al menos 6 caracteres';
+    if (!value) return t('register.error.password.required');
+    if (value.length < 6) return t('register.error.password.length');
     return '';
   };
 
@@ -114,13 +114,13 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-teal-50 dark:from-gray-900 dark:to-gray-800 px-4">
       <div className="sr-only">
-        <h1>Registrarse en Geotipicos</h1>
+        <h1>{t('register.sr.title')}</h1>
       </div>
       <div className="w-full max-w-md">
         <div className="flex justify-start mb-2">
           <Link href="/" className="inline-flex items-center text-sm text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md">
             <Home className="h-4 w-4 mr-1" aria-hidden="true" />
-            Regresar al inicio
+            {t('register.back.home')}
           </Link>
         </div>
         <Card className="w-full max-w-md">
@@ -130,14 +130,14 @@ export default function RegisterPage() {
           </div>
           <CardTitle className="text-2xl font-bold" id="register-title">{t('auth.register')}</CardTitle>
           <CardDescription>
-            Crea tu cuenta para comenzar a explorar
+            {t('register.subtitle')}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4" aria-labelledby="register-title" noValidate>
             {error && (
               <Alert variant="destructive" role="alert" aria-live="polite">
-                <AlertDescription>{error}</AlertDescription>
+                <AlertDescription>{t(error)}</AlertDescription>
               </Alert>
             )}
             
@@ -146,7 +146,7 @@ export default function RegisterPage() {
               <Input
                 id="name"
                 type="text"
-                placeholder="Tu nombre completo"
+                placeholder={t('register.placeholder.name')}
                 value={name}
                 onChange={handleNameChange}
                 required
@@ -164,7 +164,7 @@ export default function RegisterPage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="tu@email.com"
+                placeholder={t('register.placeholder.email')}
                 value={email}
                 onChange={handleEmailChange}
                 required
@@ -183,7 +183,7 @@ export default function RegisterPage() {
                 <Input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="Mínimo 6 caracteres"
+                  placeholder={t('register.placeholder.password')}
                   value={password}
                   onChange={handlePasswordChange}
                   required
@@ -197,7 +197,7 @@ export default function RegisterPage() {
                   size="icon"
                   className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8"
                   onClick={() => setShowPassword(!showPassword)}
-                  aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                  aria-label={showPassword ? t('register.hide.password') : t('register.show.password')}
                   tabIndex={0}
                 >
                   {showPassword ? (
@@ -208,7 +208,7 @@ export default function RegisterPage() {
                 </Button>
               </div>
               <div id="password-help" className="text-xs text-gray-500 dark:text-gray-400">
-                La contraseña debe tener al menos 6 caracteres
+                {t('register.help.password')}
               </div>
                {/* Barra de fortaleza de contraseña */}
                {password && (
@@ -220,7 +220,7 @@ export default function RegisterPage() {
                      />
                    </div>
                    <div className="text-xs mt-1 font-medium" aria-live="polite">
-                     Fortaleza: {strengthLabels[passwordStrength]}
+                     {t('register.strength.label')}: {t(`register.strength.${passwordStrength}`)}
                    </div>
                  </div>
                )}
@@ -235,11 +235,11 @@ export default function RegisterPage() {
               disabled={loading}
               aria-describedby={loading ? 'loading-message' : undefined}
             >
-              {loading ? 'Creando cuenta...' : t('auth.register.button')}
+              {loading ? t('register.loading') : t('auth.register.button')}
             </Button>
             {loading && (
               <div id="loading-message" className="sr-only" aria-live="polite">
-                Creando tu cuenta, por favor espera
+                {t('register.loading.message')}
               </div>
             )}
           </form>

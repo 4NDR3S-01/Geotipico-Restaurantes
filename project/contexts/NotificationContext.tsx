@@ -26,10 +26,24 @@ export const NotificationProvider = ({ children }: { children: React.ReactNode }
   const addNotification = (notification: Omit<Notification, 'id' | 'createdAt'>) => {
     const newNotification: Notification = {
       ...notification,
-      id: Date.now().toString(),
+      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       createdAt: new Date(),
     };
-    setNotifications(prev => [newNotification, ...prev]);
+    
+    setNotifications(prev => {
+      // Evitar duplicar notificaciones con el mismo título y mensaje muy rápido
+      const isDuplicate = prev.some(n => 
+        n.title === newNotification.title && 
+        n.message === newNotification.message && 
+        (new Date().getTime() - n.createdAt.getTime()) < 2000
+      );
+      
+      if (isDuplicate) {
+        return prev;
+      }
+      
+      return [newNotification, ...prev.slice(0, 9)]; // Limitar a 10 notificaciones máximo
+    });
   };
 
   const markAsRead = (id: string) => {

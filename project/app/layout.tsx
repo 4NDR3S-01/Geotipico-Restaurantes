@@ -5,6 +5,8 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { NotificationProvider } from '@/contexts/NotificationContext';
+import { Toaster } from '@/components/ui/toaster';
+import { NotificationManager } from '@/components/NotificationManager';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,9 +27,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={inter.className}>
@@ -35,11 +37,13 @@ export default function RootLayout({
           <LanguageProvider>
             <NotificationProvider>
               <AuthProvider>
+                <NotificationManager />
                 {children}
               </AuthProvider>
             </NotificationProvider>
           </LanguageProvider>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );

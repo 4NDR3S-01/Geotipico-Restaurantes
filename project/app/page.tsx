@@ -23,9 +23,9 @@ export default function HomePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" role="status" aria-label="Cargando aplicación">
+      <div className="min-h-screen flex items-center justify-center" role="status" aria-label={t('loading.app.aria')}>
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
-        <span className="sr-only">Cargando...</span>
+        <span className="sr-only">{t('loading.app')}</span>
       </div>
     );
   }
@@ -73,10 +73,10 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <h2 id="features-title" className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                ¿Por qué elegir Manta Restaurants?
+                {t('home.features.title')}
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300">
-                Descubre las mejores características de nuestra plataforma
+                {t('home.features.subtitle')}
               </p>
             </div>
             

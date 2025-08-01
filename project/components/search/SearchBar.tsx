@@ -25,16 +25,16 @@ export const SearchBar = ({ onSearch, onFilterChange, placeholder }: SearchBarPr
   const [filters, setFilters] = useState<string[]>([]);
 
   const filterOptions = [
-    { id: 'restaurant', label: 'Restaurantes' },
-    { id: 'fast_food', label: 'Comida rápida' },
-    { id: 'cafe', label: 'Cafeterías' },
-    { id: 'bar', label: 'Bares' },
-    { id: 'pizza', label: 'Pizza' },
-    { id: 'seafood', label: 'Mariscos' },
-    { id: 'italian', label: 'Italiana' },
-    { id: 'chinese', label: 'China' },
-    { id: 'mexican', label: 'Mexicana' },
-    { id: 'vegetarian', label: 'Vegetariana' },
+    { id: 'restaurant', label: t('search.filter.restaurant') },
+    { id: 'fast_food', label: t('search.filter.fast_food') },
+    { id: 'cafe', label: t('search.filter.cafe') },
+    { id: 'bar', label: t('search.filter.bar') },
+    { id: 'pizza', label: t('search.filter.pizza') },
+    { id: 'seafood', label: t('search.filter.seafood') },
+    { id: 'italian', label: t('search.filter.italian') },
+    { id: 'chinese', label: t('search.filter.chinese') },
+    { id: 'mexican', label: t('search.filter.mexican') },
+    { id: 'vegetarian', label: t('search.filter.vegetarian') },
   ];
 
   const handleSearch = (e: React.FormEvent) => {

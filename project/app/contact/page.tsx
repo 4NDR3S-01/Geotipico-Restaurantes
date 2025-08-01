@@ -52,7 +52,7 @@ export default function ContactPage() {
             {t('nav.contact')}
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            ¿Tienes alguna pregunta o sugerencia? Nos encantaría escucharte
+            {t('contact.subtitle')}
           </p>
         </div>
 
@@ -60,13 +60,13 @@ export default function ContactPage() {
           {/* Contact Form */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl">Envíanos un mensaje</CardTitle>
+              <CardTitle className="text-2xl">{t('contact.form.title')}</CardTitle>
             </CardHeader>
             <CardContent>
               {success && (
                 <Alert className="mb-6">
                   <AlertDescription>
-                    ¡Mensaje enviado exitosamente! Nos pondremos en contacto contigo pronto.
+                    {t('contact.success')}
                   </AlertDescription>
                 </Alert>
               )}
@@ -74,7 +74,7 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="name">Nombre</Label>
+                    <Label htmlFor="name">{t('contact.form.name')}</Label>
                     <Input
                       id="name"
                       name="name"

@@ -19,7 +19,7 @@ export default function AboutPage() {
             {t('nav.about')}
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Conoce más sobre nuestra misión de conectar a las personas con los mejores restaurantes de Manta
+            {t('about.subtitle')}
           </p>
         </div>
 
@@ -29,11 +29,11 @@ export default function AboutPage() {
               <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <MapPin className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               </div>
-              <CardTitle>Ubicación Precisa</CardTitle>
+              <CardTitle>{t('about.card.location.title')}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-gray-600 dark:text-gray-400">
-                Utilizamos tecnología GPS avanzada para mostrar restaurantes cerca de ti
+                {t('about.card.location.desc')}
               </p>
             </CardContent>
           </Card>
@@ -43,11 +43,11 @@ export default function AboutPage() {
               <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Users className="h-6 w-6 text-green-600 dark:text-green-400" />
               </div>
-              <CardTitle>Comunidad Local</CardTitle>
+              <CardTitle>{t('about.card.community.title')}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-gray-600 dark:text-gray-400">
-                Apoyamos a los restaurantes locales de Manta y promovemos la gastronomía ecuatoriana
+                {t('about.card.community.desc')}
               </p>
             </CardContent>
           </Card>
@@ -57,11 +57,11 @@ export default function AboutPage() {
               <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Target className="h-6 w-6 text-orange-600 dark:text-orange-400" />
               </div>
-              <CardTitle>Fácil de Usar</CardTitle>
+              <CardTitle>{t('about.card.easy.title')}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-gray-600 dark:text-gray-400">
-                Interfaz intuitiva y moderna diseñada para una experiencia de usuario excepcional
+                {t('about.card.easy.desc')}
               </p>
             </CardContent>
           </Card>
@@ -71,11 +71,11 @@ export default function AboutPage() {
               <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Heart className="h-6 w-6 text-purple-600 dark:text-purple-400" />
               </div>
-              <CardTitle>Hecho con Amor</CardTitle>
+              <CardTitle>{t('about.card.love.title')}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-gray-600 dark:text-gray-400">
-                Desarrollado por ecuatorianos para ecuatorianos, con pasión por la buena comida
+                {t('about.card.love.desc')}
               </p>
             </CardContent>
           </Card>
