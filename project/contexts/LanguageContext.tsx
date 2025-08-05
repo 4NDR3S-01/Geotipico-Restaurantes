@@ -222,26 +222,7 @@ const translations = {
     'nav.register': 'Registrarse',
     'nav.logout': 'Cerrar Sesión',
     'nav.dashboard': 'Dashboard',
-<<<<<<< HEAD
     // Search
-=======
-    'auth.login': 'Iniciar Sesión',
-    'auth.register': 'Registrarse',
-    'auth.email': 'Correo Electrónico',
-    'auth.password': 'Contraseña',
-    'auth.name': 'Nombre',
-    'auth.login.button': 'Iniciar Sesión',
-    'auth.register.button': 'Registrarse',
-    'auth.forgot.password': '¿Olvidaste tu contraseña?',
-    'auth.reset.password': 'Restablecer contraseña',
-    'auth.no.account': '¿No tienes cuenta?',
-    'auth.have.account': '¿Ya tienes cuenta?',
-    'home.title': 'Encuentra los Mejores Restaurantes en Manta',
-    'home.subtitle': 'Descubre restaurantes cerca de ti con nuestra tecnología de geolocalización',
-    'home.cta': 'Comenzar Ahora',
-    'home.features.title': 'Características principales',
-    'home.features.subtitle': 'Todo lo que necesitas para encontrar tu restaurante ideal en Manta',
->>>>>>> a5604b5512b7a5019505cfc93606609392009efc
     'search.placeholder': 'Buscar restaurantes...',
     'search.filters': 'Filtros',
     'search.filter.restaurant': 'Restaurante',
@@ -268,7 +249,6 @@ const translations = {
     'theme.light': 'Tema Claro',
     'theme.dark': 'Tema Oscuro',
     'language.spanish': 'Español',
-<<<<<<< HEAD
     'language.english': 'English',
     'loading.app': 'Cargando aplicación...',
     'loading.app.aria': 'Cargando aplicación',
@@ -311,10 +291,7 @@ const translations = {
     'help.contact.title': '¿No encontraste lo que buscabas?',
     'help.contact.desc': 'Si no pudiste encontrar la respuesta a tu pregunta, no dudes en contactarnos. Estamos aquí para ayudarte.',
     'help.contact.email.label': 'Email:',
-    'help.contact.phone.label': 'Teléfono:',
-=======
-    'language.english': 'English'
->>>>>>> a5604b5512b7a5019505cfc93606609392009efc
+    'help.contact.phone.label': 'Teléfono:'
   },
   en: {
     // Dashboard
@@ -518,26 +495,7 @@ const translations = {
     'nav.register': 'Register',
     'nav.logout': 'Logout',
     'nav.dashboard': 'Dashboard',
-<<<<<<< HEAD
     // Search
-=======
-    'auth.login': 'Login',
-    'auth.register': 'Register',
-    'auth.email': 'Email',
-    'auth.password': 'Password',
-    'auth.name': 'Name',
-    'auth.login.button': 'Login',
-    'auth.register.button': 'Register',
-    'auth.forgot.password': 'Forgot your password?',
-    'auth.reset.password': 'Reset password',
-    'auth.no.account': "Don't have an account?",
-    'auth.have.account': 'Already have an account?',
-    'home.title': 'Find the Best Restaurants in Manta',
-    'home.subtitle': 'Discover restaurants near you with our geolocation technology',
-    'home.cta': 'Get Started',
-    'home.features.title': 'Main Features',
-    'home.features.subtitle': 'Everything you need to find your ideal restaurant in Manta',
->>>>>>> a5604b5512b7a5019505cfc93606609392009efc
     'search.placeholder': 'Search restaurants...',
     'search.filters': 'Filters',
     'search.filter.restaurant': 'Restaurant',
