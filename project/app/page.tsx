@@ -86,11 +86,11 @@ export default function HomePage() {
                   <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <MapPin className="h-6 w-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
                   </div>
-                  <CardTitle>Geolocalización</CardTitle>
+                  <CardTitle>{t('home.features.geolocation.title')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Encuentra restaurantes cerca de tu ubicación con precisión GPS
+                    {t('home.features.geolocation.desc')}
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -100,11 +100,11 @@ export default function HomePage() {
                   <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <Search className="h-6 w-6 text-green-600 dark:text-green-400" aria-hidden="true" />
                   </div>
-                  <CardTitle>Búsqueda Avanzada</CardTitle>
+                  <CardTitle>{t('home.features.search.title')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Filtra por tipo de cocina, precio, calificación y más
+                    {t('home.features.search.desc')}
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -114,11 +114,11 @@ export default function HomePage() {
                   <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <Clock className="h-6 w-6 text-orange-600 dark:text-orange-400" aria-hidden="true" />
                   </div>
-                  <CardTitle>Tiempo Real</CardTitle>
+                  <CardTitle>{t('home.features.realtime.title')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Información actualizada de horarios y disponibilidad
+                    {t('home.features.realtime.desc')}
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -128,11 +128,11 @@ export default function HomePage() {
                   <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mx-auto mb-4">
                     <Star className="h-6 w-6 text-purple-600 dark:text-purple-400" aria-hidden="true" />
                   </div>
-                  <CardTitle>Calificaciones</CardTitle>
+                  <CardTitle>{t('home.features.ratings.title')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Consulta reseñas y calificaciones de otros usuarios
+                    {t('home.features.ratings.desc')}
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -144,10 +144,10 @@ export default function HomePage() {
         <section className="py-20 px-4 sm:px-6 lg:px-8 bg-blue-600 dark:bg-blue-800" aria-labelledby="cta-title">
           <div className="max-w-4xl mx-auto text-center">
             <h2 id="cta-title" className="text-3xl font-bold text-white mb-6">
-              ¡Empieza a explorar ahora!
+              {t('home.cta.title')}
             </h2>
             <p className="text-xl text-blue-100 mb-8">
-              Únete a miles de usuarios que ya descubren los mejores restaurantes de Manta
+              {t('home.cta.subtitle')}
             </p>
             <Button 
               size="lg" 
@@ -156,7 +156,7 @@ export default function HomePage() {
               className="text-lg px-8 py-3"
               aria-label="Crear cuenta gratuita"
             >
-              Crear cuenta gratis
+              {t('home.cta.button')}
             </Button>
           </div>
         </section>

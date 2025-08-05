@@ -15,10 +15,18 @@ export interface Restaurant {
   price_level?: number;
   types: string[];
   photos?: string[];
+  phone?: string;
+  website?: string;
   opening_hours?: {
     open_now: boolean;
     weekday_text: string[];
   };
+  reviews?: Array<{
+    author_name: string;
+    rating: number;
+    text: string;
+    time: number;
+  }>;
   distance?: number;
 }
 

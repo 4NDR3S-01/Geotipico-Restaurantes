@@ -79,19 +79,19 @@ export default function ContactPage() {
                       id="name"
                       name="name"
                       type="text"
-                      placeholder="Tu nombre"
+                      placeholder={t('contact.form.name.placeholder')}
                       value={formData.name}
                       onChange={handleChange}
                       required
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email">{t('contact.form.email')}</Label>
                     <Input
                       id="email"
                       name="email"
                       type="email"
-                      placeholder="tu@email.com"
+                      placeholder={t('contact.form.email.placeholder')}
                       value={formData.email}
                       onChange={handleChange}
                       required
@@ -100,12 +100,12 @@ export default function ContactPage() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="subject">Asunto</Label>
+                  <Label htmlFor="subject">{t('contact.form.subject')}</Label>
                   <Input
                     id="subject"
                     name="subject"
                     type="text"
-                    placeholder="¿En qué podemos ayudarte?"
+                    placeholder={t('contact.form.subject.placeholder')}
                     value={formData.subject}
                     onChange={handleChange}
                     required
@@ -113,11 +113,11 @@ export default function ContactPage() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="message">Mensaje</Label>
+                  <Label htmlFor="message">{t('contact.form.message')}</Label>
                   <Textarea
                     id="message"
                     name="message"
-                    placeholder="Escribe tu mensaje aquí..."
+                    placeholder={t('contact.form.message.placeholder')}
                     rows={6}
                     value={formData.message}
                     onChange={handleChange}
@@ -126,7 +126,7 @@ export default function ContactPage() {
                 </div>
                 
                 <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? 'Enviando...' : 'Enviar mensaje'}
+                  {loading ? t('contact.form.sending') : t('contact.form.send')}
                 </Button>
               </form>
             </CardContent>
@@ -136,7 +136,7 @@ export default function ContactPage() {
           <div className="space-y-8">
             <Card>
               <CardHeader>
-                <CardTitle className="text-2xl">Información de contacto</CardTitle>
+                <CardTitle className="text-2xl">{t('contact.info.title')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-start space-x-4">
@@ -144,7 +144,7 @@ export default function ContactPage() {
                     <Mail className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">Email</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-white">{t('contact.info.email')}</h3>
                     <p className="text-gray-600 dark:text-gray-400">contacto@mantarestaurants.com</p>
                   </div>
                 </div>
@@ -154,7 +154,7 @@ export default function ContactPage() {
                     <Phone className="h-5 w-5 text-green-600 dark:text-green-400" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">Teléfono</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-white">{t('contact.info.phone')}</h3>
                     <p className="text-gray-600 dark:text-gray-400">+593 99 123 4567</p>
                   </div>
                 </div>
@@ -164,7 +164,7 @@ export default function ContactPage() {
                     <MapPin className="h-5 w-5 text-orange-600 dark:text-orange-400" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">Ubicación</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-white">{t('contact.info.location')}</h3>
                     <p className="text-gray-600 dark:text-gray-400">Manta, Manabí, Ecuador</p>
                   </div>
                 </div>
@@ -174,9 +174,9 @@ export default function ContactPage() {
                     <Clock className="h-5 w-5 text-purple-600 dark:text-purple-400" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">Horario de atención</h3>
-                    <p className="text-gray-600 dark:text-gray-400">Lunes - Viernes: 9:00 AM - 6:00 PM</p>
-                    <p className="text-gray-600 dark:text-gray-400">Sábados: 9:00 AM - 2:00 PM</p>
+                    <h3 className="font-semibold text-gray-900 dark:text-white">{t('contact.info.hours')}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{t('contact.info.hours.weekdays')}</p>
+                    <p className="text-gray-600 dark:text-gray-400">{t('contact.info.hours.saturday')}</p>
                   </div>
                 </div>
               </CardContent>
@@ -184,35 +184,34 @@ export default function ContactPage() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Preguntas frecuentes</CardTitle>
+                <CardTitle>{t('contact.faq.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div>
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
-                      ¿Cómo agrego mi restaurante?
+                      {t('contact.faq.add.q')}
                     </h4>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      Los restaurantes se muestran automáticamente desde Google Maps. Para mayor visibilidad, 
-                      asegúrate de que tu restaurante esté registrado en Google My Business.
+                      {t('contact.faq.add.a')}
                     </p>
                   </div>
                   
                   <div>
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
-                      ¿Es gratuito usar la plataforma?
+                      {t('contact.faq.free.q')}
                     </h4>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      Sí, nuestra plataforma es completamente gratuita para todos los usuarios.
+                      {t('contact.faq.free.a')}
                     </p>
                   </div>
                   
                   <div>
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
-                      ¿Cómo reporto información incorrecta?
+                      {t('contact.faq.report.q')}
                     </h4>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      Puedes enviarnos un mensaje a través de este formulario con los detalles del problema.
+                      {t('contact.faq.report.a')}
                     </p>
                   </div>
                 </div>

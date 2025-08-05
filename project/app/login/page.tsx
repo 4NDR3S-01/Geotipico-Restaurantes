@@ -28,14 +28,14 @@ export default function LoginPage() {
 
   // Validación en tiempo real para email
   const validateEmail = (value: string) => {
-    if (!value) return 'El email es obligatorio';
+    if (!value) return t('auth.login.email.required');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(value)) return 'El email no es válido';
+    if (!emailRegex.test(value)) return t('auth.login.email.invalid');
     return '';
   };
   // Validación en tiempo real para contraseña
   const validatePassword = (value: string) => {
-    if (!value) return 'La contraseña es obligatoria';
+    if (!value) return t('auth.login.password.required');
     return '';
   };
 
@@ -66,10 +66,10 @@ export default function LoginPage() {
       if (success) {
         router.push('/dashboard');
       } else {
-        setError('Credenciales inválidas');
+        setError(t('auth.login.error.invalid'));
       }
     } catch (err) {
-      setError('Error al iniciar sesión');
+      setError(t('auth.login.error.general'));
     } finally {
       setLoading(false);
     }
@@ -78,13 +78,13 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-teal-50 dark:from-gray-900 dark:to-gray-800 px-4">
       <div className="sr-only">
-        <h1>Iniciar sesión en Geotipicos</h1>
+        <h1>{t('auth.login.sr.title')}</h1>
       </div>
       <div className="w-full max-w-md">
         <div className="flex justify-start mb-2">
           <Link href="/" className="inline-flex items-center text-sm text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md">
             <Home className="h-4 w-4 mr-1" aria-hidden="true" />
-            Regresar al inicio
+            {t('register.back.home')}
           </Link>
         </div>
         <Card className="w-full max-w-md">
@@ -94,7 +94,7 @@ export default function LoginPage() {
           </div>
           <CardTitle className="text-2xl font-bold" id="login-title">{t('auth.login')}</CardTitle>
           <CardDescription>
-            Ingresa tus credenciales para acceder a tu cuenta
+            {t('auth.login.subtitle')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -129,7 +129,7 @@ export default function LoginPage() {
                 <Input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="Tu contraseña"
+                  placeholder={t('register.placeholder.password')}
                   value={password}
                   onChange={handlePasswordChange}
                   required
@@ -143,7 +143,7 @@ export default function LoginPage() {
                   size="icon"
                   className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8"
                   onClick={() => setShowPassword(!showPassword)}
-                  aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                  aria-label={showPassword ? t('auth.password.hide') : t('auth.password.show')}
                   tabIndex={0}
                 >
                   {showPassword ? (
@@ -164,11 +164,11 @@ export default function LoginPage() {
               disabled={loading}
               aria-describedby={loading ? 'loading-message' : undefined}
             >
-              {loading ? 'Iniciando sesión...' : t('auth.login.button')}
+              {loading ? t('auth.login.loading') : t('auth.login.button')}
             </Button>
             {loading && (
               <div id="loading-message" className="sr-only" aria-live="polite">
-                Procesando inicio de sesión, por favor espera
+                {t('auth.login.loading.message')}
               </div>
             )}
           </form>
@@ -179,7 +179,7 @@ export default function LoginPage() {
                 href="/forgot-password" 
                 className="text-sm text-blue-600 hover:text-blue-500 font-medium block focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md"
               >
-                ¿Olvidaste tu contraseña?
+                {t('auth.forgot.password')}
               </Link>
             </div>
             <div className="mt-4">

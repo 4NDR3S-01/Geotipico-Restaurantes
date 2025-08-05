@@ -15,7 +15,6 @@ export const metadata: Metadata = {
   description: 'Descubre los mejores restaurantes de Manta con nuestra tecnología de geolocalización',
   keywords: 'restaurantes, manta, ecuador, comida, geolocalización',
   authors: [{ name: 'Manta Restaurants' }],
-  viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
   openGraph: {
     title: 'Manta Restaurants',
@@ -23,6 +22,11 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'es_EC',
   },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
