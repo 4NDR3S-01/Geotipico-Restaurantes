@@ -40,7 +40,7 @@ export default function TestGoogleApiPage() {
     // Limpiar scripts existentes
     const existingScripts = document.querySelectorAll('script[src*="maps.googleapis.com"]');
     existingScripts.forEach(script => {
-      addLog(`🗑️ Removiendo script existente: ${script.src}`);
+      addLog(`🗑️ Removiendo script existente: ${(script as HTMLScriptElement).src}`);
       script.remove();
     });
     
