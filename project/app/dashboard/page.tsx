@@ -628,6 +628,32 @@ export default function DashboardPage() {
             </div>
           </TabsContent>
           <TabsContent value="list" className="mt-6" role="tabpanel" aria-label="Panel de lista">
+            {/* ISO 9241-11: Eficacia - Información de contexto y resumen */}
+            <div className="mb-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-4 border border-blue-200">
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="h-5 w-5 text-blue-600" />
+                    <span className="font-medium text-gray-900">
+                      {filteredRestaurants.length} {filteredRestaurants.length === 1 ? 'restaurante encontrado' : 'restaurantes encontrados'}
+                    </span>
+                  </div>
+                  {userLocation && (
+                    <div className="text-sm text-gray-600">
+                      📍 Cerca de tu ubicación actual
+                    </div>
+                  )}
+                </div>
+                <div className="flex items-center space-x-2 text-sm text-gray-600">
+                  <span>Ordenados por distancia</span>
+                  <Badge variant="outline" className="text-xs">
+                    {activeFilters.length > 0 ? `${activeFilters.length} filtros activos` : 'Sin filtros'}
+                  </Badge>
+                </div>
+              </div>
+            </div>
+
+            {/* ISO 9241-11: Eficiencia - Lista mejorada con información completa */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="region" aria-label="Lista completa de restaurantes">
               {loading ? (
                 <div className="col-span-full flex items-center justify-center py-12" role="status" aria-label="Cargando restaurantes">
@@ -636,17 +662,107 @@ export default function DashboardPage() {
                 </div>
               ) : filteredRestaurants.length === 0 ? (
                 <div className="col-span-full text-center py-12" role="status">
-                  <p className="text-gray-500 dark:text-gray-400">
-                    {t('dashboard.noresults')}
-                  </p>
+                  <div className="max-w-md mx-auto">
+                    <div className="text-6xl mb-4">🔍</div>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">No se encontraron restaurantes</h3>
+                    <p className="text-gray-500 dark:text-gray-400 mb-4">
+                      {searchQuery ? 
+                        `No hay resultados para "${searchQuery}"` : 
+                        'Intenta ajustar tus filtros de búsqueda'
+                      }
+                    </p>
+                    {(searchQuery || activeFilters.length > 0) && (
+                      <Button 
+                        variant="outline" 
+                        onClick={() => {
+                          setSearchQuery('');
+                          setActiveFilters([]);
+                        }}
+                        className="mt-2"
+                      >
+                        Limpiar búsqueda y filtros
+                      </Button>
+                    )}
+                  </div>
                 </div>
               ) : (
-                filteredRestaurants.map((restaurant) => (
-                  <RestaurantCard
-                    key={restaurant.id}
-                    restaurant={restaurant}
-                    onClick={() => handleRestaurantClick(restaurant)}
-                  />
+                filteredRestaurants.map((restaurant, index) => (
+                  <div key={restaurant.id} className="relative">
+                    {/* ISO 9241-11: Satisfacción - Tarjeta mejorada con información adicional */}
+                    <div className="group relative">
+                      <RestaurantCard
+                        restaurant={restaurant}
+                        onClick={() => handleRestaurantClick(restaurant)}
+                      />
+                      
+                      {/* ISO 9241-11: Eficacia - Botones de acción rápida */}
+                      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <div className="flex space-x-1">
+                          <Button
+                            size="sm"
+                            variant="secondary"
+                            className="h-8 w-8 p-0 bg-white/90 hover:bg-white shadow-sm"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const directionsUrl = userLocation 
+                                ? `https://www.google.com/maps/dir/${userLocation.lat},${userLocation.lng}/${restaurant.lat},${restaurant.lng}`
+                                : `https://www.google.com/maps/place/${restaurant.lat},${restaurant.lng}`;
+                              window.open(directionsUrl, '_blank');
+                            }}
+                            title="Cómo llegar"
+                            aria-label={`Obtener direcciones a ${restaurant.name}`}
+                          >
+                            🗺️
+                          </Button>
+                          {restaurant.phone && (
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              className="h-8 w-8 p-0 bg-white/90 hover:bg-white shadow-sm"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                window.open(`tel:${restaurant.phone}`, '_self');
+                              }}
+                              title="Llamar"
+                              aria-label={`Llamar a ${restaurant.name}`}
+                            >
+                              📞
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* ISO 9241-11: Eficiencia - Indicador de posición en lista */}
+                      <div className="absolute top-3 left-3">
+                        <Badge variant="secondary" className="text-xs bg-white/90 text-gray-700">
+                          #{index + 1}
+                        </Badge>
+                      </div>
+
+                      {/* ISO 9241-11: Satisfacción - Información adicional en hover */}
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-b-lg">
+                        <div className="flex items-center justify-between text-sm">
+                          <div className="flex items-center space-x-2">
+                            {restaurant.distance && (
+                              <span className="flex items-center space-x-1">
+                                <span>📍</span>
+                                <span>{restaurant.distance.toFixed(1)} km</span>
+                              </span>
+                            )}
+                            {restaurant.price_level && (
+                              <span className="flex items-center space-x-1">
+                                <span>💰</span>
+                                <span>{'$'.repeat(restaurant.price_level)}</span>
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-xs">
+                            Click para ver detalles
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 ))
               )}
             </div>
