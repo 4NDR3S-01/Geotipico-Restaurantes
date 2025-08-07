@@ -1,7 +1,7 @@
 'use client';
 
 import { GoogleMap } from './GoogleMap';
-import { SimpleMap } from './SimpleMap';
+// import { SimpleMap } from './SimpleMap';
 import { Restaurant } from '@/types';
 
 interface MapWrapperProps {
@@ -27,11 +27,11 @@ export const MapWrapper = ({ restaurants, center, zoom, onRestaurantClick }: Map
     );
   }
 
-  return (
-    <SimpleMap
-      restaurants={restaurants}
-      center={center}
-      onRestaurantClick={onRestaurantClick}
-    />
-  );
+  // return (
+  //   <SimpleMap
+  //     restaurants={restaurants}
+  //     center={center}
+  //     onRestaurantClick={onRestaurantClick}
+  //   />
+  // );
 };

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useNotifications } from '@/contexts/NotificationContext';
-import { MapWrapper } from '@/components/maps/MapWrapper';
+// import { MapWrapper } from '@/components/maps/MapWrapper';
 import { Restaurant } from '@/types';
 
 const mockRestaurants: Restaurant[] = [
@@ -143,13 +143,13 @@ export default function DemoPage() {
         {/* Mapa */}
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-xl font-semibold mb-4">Mapa de Restaurantes</h2>
-          <div className="h-96 w-full">
+          {/* <div className="h-96 w-full">
             <MapWrapper
               restaurants={mockRestaurants}
               zoom={13}
               onRestaurantClick={handleRestaurantClick}
             />
-          </div>
+          </div> */}
         </div>
 
         {/* Información adicional */}
