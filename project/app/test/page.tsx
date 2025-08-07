@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { GoogleMap } from '@/components/maps/GoogleMap';
+import GoogleMapFallback from '@/components/maps/GoogleMapFallback';
 import { NotificationDemo } from '@/components/NotificationDemo';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -92,11 +92,11 @@ export default function TestPage() {
                 <CardTitle>Mapa de Restaurantes en Manta</CardTitle>
               </CardHeader>
               <CardContent className="h-full">
-                <GoogleMap
+                <GoogleMapFallback
                   restaurants={sampleRestaurants}
                   center={{ lat: -0.9526, lng: -80.7320 }}
                   zoom={14}
-                  onRestaurantClick={setSelectedRestaurant}
+                  className="h-full"
                 />
               </CardContent>
             </Card>

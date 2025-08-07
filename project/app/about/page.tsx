@@ -84,23 +84,17 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-              Nuestra Historia
+              {t('about.history.title')}
             </h2>
             <div className="space-y-4 text-gray-600 dark:text-gray-400">
               <p>
-                Manta Restaurants nació de la necesidad de conectar a los habitantes y visitantes 
-                de Manta con los mejores restaurantes de la ciudad. Como manabitas, entendemos 
-                la importancia de la gastronomía en nuestra cultura.
+                {t('about.history.p1')}
               </p>
               <p>
-                Nuestra plataforma utiliza tecnología de geolocalización para ayudarte a descubrir 
-                restaurantes cerca de ti, desde los tradicionales locales de mariscos hasta los 
-                modernos restaurantes de cocina internacional.
+                {t('about.history.p2')}
               </p>
               <p>
-                Creemos que cada comida es una oportunidad para crear memorias, y queremos ser 
-                parte de esos momentos especiales conectándote con los lugares perfectos para 
-                disfrutar de la mejor comida.
+                {t('about.history.p3')}
               </p>
             </div>
           </div>
@@ -110,10 +104,10 @@ export default function AboutPage() {
               <div className="text-center">
                 <MapPin className="h-16 w-16 text-blue-600 dark:text-blue-400 mx-auto mb-4" />
                 <p className="text-lg font-semibold text-gray-900 dark:text-white">
-                  Manta, Ecuador
+                  {t('about.location.city')}
                 </p>
                 <p className="text-gray-600 dark:text-gray-400">
-                  El corazón de nuestra plataforma
+                  {t('about.location.heart')}
                 </p>
               </div>
             </div>
@@ -122,31 +116,31 @@ export default function AboutPage() {
 
         <div className="mt-16 text-center">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-            Nuestros Valores
+            {t('about.values.title')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="space-y-4">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Transparencia
+                {t('about.values.transparency.title')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Mostramos información real y actualizada de todos los restaurantes
+                {t('about.values.transparency.desc')}
               </p>
             </div>
             <div className="space-y-4">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Simplicidad
+                {t('about.values.simplicity.title')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Hacemos que encontrar un buen restaurante sea fácil y rápido
+                {t('about.values.simplicity.desc')}
               </p>
             </div>
             <div className="space-y-4">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Compromiso Local
+                {t('about.values.commitment.title')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Apoyamos el crecimiento y desarrollo de la gastronomía local
+                {t('about.values.commitment.desc')}
               </p>
             </div>
           </div>

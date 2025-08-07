@@ -22,6 +22,7 @@ export const MapWrapper = ({ restaurants, center, zoom, onRestaurantClick }: Map
         center={center}
         zoom={zoom}
         onRestaurantClick={onRestaurantClick}
+        apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
       />
     );
   }

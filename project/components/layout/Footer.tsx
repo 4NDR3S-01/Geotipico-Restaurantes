@@ -16,7 +16,7 @@ export const Footer = () => {
               <span className="font-bold text-xl">Geotipicos</span>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
-              Descubre los mejores restaurantes de Manta con nuestra tecnología de geolocalización avanzada.
+              {t('footer.description')}
             </p>
             <div className="flex items-center space-x-2 text-gray-400">
               <MapPin className="h-4 w-4" />
@@ -26,7 +26,7 @@ export const Footer = () => {
 
           {/* Links */}
           <div>
-            <h3 className="font-semibold mb-4">Enlaces</h3>
+            <h3 className="font-semibold mb-4">{t('footer.links.title')}</h3>
             <ul className="space-y-2 text-gray-400">
               <li><a href="/" className="hover:text-white transition-colors">{t('nav.home')}</a></li>
               <li><a href="/about" className="hover:text-white transition-colors">{t('nav.about')}</a></li>
@@ -37,23 +37,23 @@ export const Footer = () => {
 
           {/* Legal */}
           <div>
-            <h3 className="font-semibold mb-4">Legal</h3>
+            <h3 className="font-semibold mb-4">{t('footer.legal.title')}</h3>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="/privacy" className="hover:text-white transition-colors">Privacidad</a></li>
-              <li><a href="/terms" className="hover:text-white transition-colors">Términos</a></li>
-              <li><a href="/cookies" className="hover:text-white transition-colors">Cookies</a></li>
+              <li><a href="/privacy" className="hover:text-white transition-colors">{t('footer.legal.privacy')}</a></li>
+              <li><a href="/terms" className="hover:text-white transition-colors">{t('footer.legal.terms')}</a></li>
+              <li><a href="/cookies" className="hover:text-white transition-colors">{t('footer.legal.cookies')}</a></li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2024 Manta Restaurants. Todos los derechos reservados.
+            {t('footer.copyright')}
           </p>
           <div className="flex items-center space-x-2 text-gray-400 text-sm mt-4 md:mt-0">
-            <span>Hecho con</span>
+            <span>{t('footer.made')}</span>
             <Heart className="h-4 w-4 text-red-500" />
-            <span>en Ecuador</span>
+            <span>{t('footer.location')}</span>
           </div>
         </div>
       </div>

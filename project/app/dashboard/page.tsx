@@ -6,8 +6,9 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useNotifications } from '@/contexts/NotificationContext';
 import { Restaurant } from '@/types';
-import { GoogleMap } from '@/components/maps/GoogleMap';
+import GoogleMapFallback from '@/components/maps/GoogleMapFallback';
 import { RestaurantCard } from '@/components/restaurants/RestaurantCard';
+import RestaurantDetails from '@/components/restaurants/RestaurantDetails';
 import { SearchBar } from '@/components/search/SearchBar';
 import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
@@ -57,25 +58,43 @@ export default function DashboardPage() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setUserLocation({
+          const newLocation = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
-          });
+          };
+          setUserLocation(newLocation);
+          
+          // Solo mostrar notificación de éxito si no es la ubicación por defecto
+          if (Math.abs(newLocation.lat - (-0.9526)) > 0.01) {
+            addNotification({
+              title: t('dashboard.location.success.title'),
+              message: t('dashboard.location.success.message'),
+              type: 'success',
+              read: false,
+            });
+          }
         },
         (error) => {
           console.error('Error getting location:', error);
           // Default to Manta center if geolocation fails
-          setUserLocation({ lat: -0.9526, lng: -80.7320 });
+          const defaultLocation = { lat: -0.9526, lng: -80.7320 };
+          setUserLocation(defaultLocation);
           addNotification({
             title: t('dashboard.location.unavailable.title'),
             message: t('dashboard.location.unavailable.message'),
             type: 'warning',
             read: false,
           });
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 300000 // 5 minutos de cache
         }
       );
     } else {
-      setUserLocation({ lat: -0.9526, lng: -80.7320 });
+      const defaultLocation = { lat: -0.9526, lng: -80.7320 };
+      setUserLocation(defaultLocation);
       addNotification({
         title: t('dashboard.location.unsupported.title'),
         message: t('dashboard.location.unsupported.message'),
@@ -90,6 +109,316 @@ export default function DashboardPage() {
 
     setLoading(true);
     try {
+      // Datos de muestra con información completa para demostrar el componente
+      const sampleRestaurants: Restaurant[] = [
+        {
+          id: '1',
+          name: 'El Pescador de Manta',
+          address: 'Malecón de Manta, Av. Flavio Reyes, Manta, Ecuador',
+          lat: userLocation.lat + 0.01,
+          lng: userLocation.lng + 0.01,
+          rating: 4.5,
+          price_level: 3,
+          types: ['restaurant', 'seafood', 'ecuadorian_cuisine'],
+          photos: [],
+          phone: '+593 5 262-1234',
+          website: 'https://elpescadordemanta.com',
+          opening_hours: {
+            open_now: true,
+            weekday_text: [
+              'Lunes: 11:00 AM - 10:00 PM',
+              'Martes: 11:00 AM - 10:00 PM',
+              'Miércoles: 11:00 AM - 10:00 PM',
+              'Jueves: 11:00 AM - 10:00 PM',
+              'Viernes: 11:00 AM - 11:00 PM',
+              'Sábado: 11:00 AM - 11:00 PM',
+              'Domingo: 11:00 AM - 9:00 PM'
+            ]
+          },
+          reviews: [
+            {
+              author_name: 'Carlos M.',
+              rating: 5,
+              text: 'Excelente restaurant! Los mariscos son fresquísimos y el ambiente es muy acogedor.',
+              time: Date.now() - 86400000
+            },
+            {
+              author_name: 'María S.',
+              rating: 4,
+              text: 'La parrillada de mariscos es espectacular. Recomendado 100%.',
+              time: Date.now() - 172800000
+            }
+          ]
+        },
+        {
+          id: '2',
+          name: 'Mariscos Doña Rosa',
+          address: 'Av. 4 de Noviembre y Calle 15, Manta, Ecuador',
+          lat: userLocation.lat - 0.005,
+          lng: userLocation.lng + 0.008,
+          rating: 4.3,
+          price_level: 2,
+          types: ['restaurant', 'seafood', 'local_cuisine'],
+          photos: [],
+          phone: '+593 5 262-5678',
+          opening_hours: {
+            open_now: false,
+            weekday_text: [
+              'Lunes: 10:00 AM - 9:00 PM',
+              'Martes: 10:00 AM - 9:00 PM',
+              'Miércoles: 10:00 AM - 9:00 PM',
+              'Jueves: 10:00 AM - 9:00 PM',
+              'Viernes: 10:00 AM - 10:00 PM',
+              'Sábado: 10:00 AM - 10:00 PM',
+              'Domingo: Cerrado'
+            ]
+          },
+          reviews: [
+            {
+              author_name: 'Luis P.',
+              rating: 4,
+              text: 'Muy buena comida casera y precios justos. El ceviche es excelente.',
+              time: Date.now() - 259200000
+            }
+          ]
+        },
+        {
+          id: '3',
+          name: 'Restaurant El Faro',
+          address: 'Puerto de Manta, Terminal Pesquero, Manta, Ecuador',
+          lat: userLocation.lat + 0.008,
+          lng: userLocation.lng - 0.012,
+          rating: 4.7,
+          price_level: 4,
+          types: ['restaurant', 'seafood', 'fine_dining', 'romantic'],
+          photos: [],
+          phone: '+593 5 262-9999',
+          website: 'https://elfaromanta.ec',
+          opening_hours: {
+            open_now: true,
+            weekday_text: [
+              'Lunes: 12:00 PM - 11:00 PM',
+              'Martes: 12:00 PM - 11:00 PM',
+              'Miércoles: 12:00 PM - 11:00 PM',
+              'Jueves: 12:00 PM - 11:00 PM',
+              'Viernes: 12:00 PM - 12:00 AM',
+              'Sábado: 12:00 PM - 12:00 AM',
+              'Domingo: 12:00 PM - 10:00 PM'
+            ]
+          },
+          reviews: [
+            {
+              author_name: 'Ana T.',
+              rating: 5,
+              text: 'Una experiencia gastronómica increíble. La vista al mar es espectacular.',
+              time: Date.now() - 86400000
+            },
+            {
+              author_name: 'Roberto L.',
+              rating: 5,
+              text: 'El mejor restaurant de Manta sin duda. Calidad y servicio excepcionales.',
+              time: Date.now() - 172800000
+            },
+            {
+              author_name: 'Patricia R.',
+              rating: 4,
+              text: 'Muy elegante y la comida deliciosa, aunque un poco costoso.',
+              time: Date.now() - 345600000
+            }
+          ]
+        },
+        {
+          id: '4',
+          name: 'Bar La Terraza',
+          address: 'Calle 13 y Av. 2, Manta, Ecuador',
+          lat: userLocation.lat - 0.008,
+          lng: userLocation.lng - 0.005,
+          rating: 4.2,
+          price_level: 2,
+          types: ['bar', 'night_club', 'drinks'],
+          photos: [],
+          phone: '+593 5 262-3456',
+          opening_hours: {
+            open_now: true,
+            weekday_text: [
+              'Lunes: 6:00 PM - 2:00 AM',
+              'Martes: 6:00 PM - 2:00 AM',
+              'Miércoles: 6:00 PM - 2:00 AM',
+              'Jueves: 6:00 PM - 3:00 AM',
+              'Viernes: 6:00 PM - 4:00 AM',
+              'Sábado: 6:00 PM - 4:00 AM',
+              'Domingo: 6:00 PM - 12:00 AM'
+            ]
+          },
+          reviews: [
+            {
+              author_name: 'Diego R.',
+              rating: 4,
+              text: 'Excelente ambiente, buena música y cocteles deliciosos.',
+              time: Date.now() - 86400000
+            }
+          ]
+        },
+        {
+          id: '5',
+          name: 'Café Central',
+          address: 'Av. 4 de Noviembre y Calle 12, Manta, Ecuador',
+          lat: userLocation.lat + 0.003,
+          lng: userLocation.lng + 0.004,
+          rating: 4.4,
+          price_level: 1,
+          types: ['cafe', 'bakery', 'breakfast'],
+          photos: [],
+          phone: '+593 5 262-7890',
+          website: 'https://cafecentral.ec',
+          opening_hours: {
+            open_now: true,
+            weekday_text: [
+              'Lunes: 6:00 AM - 8:00 PM',
+              'Martes: 6:00 AM - 8:00 PM',
+              'Miércoles: 6:00 AM - 8:00 PM',
+              'Jueves: 6:00 AM - 8:00 PM',
+              'Viernes: 6:00 AM - 9:00 PM',
+              'Sábado: 7:00 AM - 9:00 PM',
+              'Domingo: 7:00 AM - 7:00 PM'
+            ]
+          },
+          reviews: [
+            {
+              author_name: 'Carmen L.',
+              rating: 5,
+              text: 'El mejor café de Manta! Los pasteles son deliciosos y el ambiente muy acogedor.',
+              time: Date.now() - 172800000
+            },
+            {
+              author_name: 'José M.',
+              rating: 4,
+              text: 'Perfecto para desayunos. El café es de excelente calidad.',
+              time: Date.now() - 259200000
+            }
+          ]
+        },
+        {
+          id: '6',
+          name: 'Discoteca Oceano',
+          address: 'Malecón Escénico, Manta, Ecuador',
+          lat: userLocation.lat + 0.015,
+          lng: userLocation.lng + 0.002,
+          rating: 4.0,
+          price_level: 3,
+          types: ['night_club', 'bar', 'dancing'],
+          photos: [],
+          phone: '+593 5 262-4567',
+          opening_hours: {
+            open_now: false,
+            weekday_text: [
+              'Lunes: Cerrado',
+              'Martes: Cerrado',
+              'Miércoles: Cerrado',
+              'Jueves: 9:00 PM - 4:00 AM',
+              'Viernes: 9:00 PM - 5:00 AM',
+              'Sábado: 9:00 PM - 5:00 AM',
+              'Domingo: Cerrado'
+            ]
+          },
+          reviews: [
+            {
+              author_name: 'Andrea V.',
+              rating: 4,
+              text: 'Buena música electrónica y ambiente. Los fines de semana está muy animado.',
+              time: Date.now() - 345600000
+            }
+          ]
+        },
+        {
+          id: '7',
+          name: 'Pizzería Mamma Mía',
+          address: 'Av. 105 y Calle 104, Manta, Ecuador',
+          lat: userLocation.lat - 0.012,
+          lng: userLocation.lng + 0.015,
+          rating: 4.3,
+          price_level: 2,
+          types: ['restaurant', 'pizza', 'italian_cuisine'],
+          photos: [],
+          phone: '+593 5 262-8901',
+          opening_hours: {
+            open_now: true,
+            weekday_text: [
+              'Lunes: 5:00 PM - 11:00 PM',
+              'Martes: 5:00 PM - 11:00 PM',
+              'Miércoles: 5:00 PM - 11:00 PM',
+              'Jueves: 5:00 PM - 11:00 PM',
+              'Viernes: 5:00 PM - 12:00 AM',
+              'Sábado: 12:00 PM - 12:00 AM',
+              'Domingo: 12:00 PM - 10:00 PM'
+            ]
+          },
+          reviews: [
+            {
+              author_name: 'Marco P.',
+              rating: 4,
+              text: 'Las pizzas están muy buenas, masa delgada y ingredientes frescos.',
+              time: Date.now() - 172800000
+            }
+          ]
+        },
+        {
+          id: '8',
+          name: 'Karaoke Golden',
+          address: 'Calle 15 y Av. 3, Manta, Ecuador',
+          lat: userLocation.lat + 0.006,
+          lng: userLocation.lng - 0.008,
+          rating: 3.9,
+          price_level: 2,
+          types: ['bar', 'karaoke', 'entertainment'],
+          photos: [],
+          phone: '+593 5 262-6543',
+          opening_hours: {
+            open_now: true,
+            weekday_text: [
+              'Lunes: Cerrado',
+              'Martes: 7:00 PM - 2:00 AM',
+              'Miércoles: 7:00 PM - 2:00 AM',
+              'Jueves: 7:00 PM - 3:00 AM',
+              'Viernes: 7:00 PM - 4:00 AM',
+              'Sábado: 7:00 PM - 4:00 AM',
+              'Domingo: 7:00 PM - 1:00 AM'
+            ]
+          },
+          reviews: [
+            {
+              author_name: 'Sofía T.',
+              rating: 4,
+              text: 'Muy divertido para ir con amigos. Buena selección de canciones.',
+              time: Date.now() - 259200000
+            }
+          ]
+        }
+      ];
+
+      const restaurantsWithDistance = sampleRestaurants.map((restaurant: Restaurant) => ({
+        ...restaurant,
+        distance: calculateDistance(
+          userLocation.lat,
+          userLocation.lng,
+          restaurant.lat,
+          restaurant.lng
+        ),
+      }));
+
+      // Ordenar por distancia
+      restaurantsWithDistance.sort((a, b) => (a.distance || 0) - (b.distance || 0));
+      
+      setRestaurants(restaurantsWithDistance);
+      
+      addNotification({
+        title: t('dashboard.restaurants.loaded.title'),
+        message: t('dashboard.restaurants.loaded.message'),
+        type: 'success',
+        read: false,
+      });
+
+      /* API call original - comentado para usar datos de muestra
       const response = await fetch(
         `/api/restaurants?lat=${userLocation.lat}&lng=${userLocation.lng}&radius=5000`
       );
@@ -119,6 +448,7 @@ export default function DashboardPage() {
           read: false,
         });
       }
+      */
     } catch (error) {
       console.error('Error fetching restaurants:', error);
       addNotification({
@@ -189,7 +519,7 @@ export default function DashboardPage() {
   }
 
   // Obtener la API key de Google Maps solo en build/SSR
-  const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+  // const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY; // Ya no se usa con GoogleMapFallback
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -230,11 +560,13 @@ export default function DashboardPage() {
                 <Card className="h-full">
                   <CardContent className="p-4 h-full" role="application" aria-label="Mapa interactivo de restaurantes">
                     {userLocation ? (
-                      <GoogleMap
+                      <GoogleMapFallback
                         restaurants={filteredRestaurants}
                         center={userLocation}
+                        className="h-full"
+                        showViewToggle={true}
                         onRestaurantClick={handleRestaurantClick}
-                        apiKey={googleMapsApiKey}
+                        selectedRestaurant={selectedRestaurant || undefined}
                       />
                     ) : (
                       <div className="flex items-center justify-center h-full" role="status" aria-label="Cargando mapa">
@@ -247,14 +579,11 @@ export default function DashboardPage() {
               </div>
               <aside className="space-y-4" aria-label="Panel lateral de información">
                 {selectedRestaurant && (
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg" id="selected-restaurant">{t('dashboard.selected.title')}</CardTitle>
-                    </CardHeader>
-                    <CardContent aria-labelledby="selected-restaurant">
-                      <RestaurantCard restaurant={selectedRestaurant} />
-                    </CardContent>
-                  </Card>
+                  <RestaurantDetails 
+                    restaurant={selectedRestaurant} 
+                    userLocation={userLocation || undefined}
+                    onClose={() => setSelectedRestaurant(null)}
+                  />
                 )}
 
                 <Card>
@@ -299,6 +628,32 @@ export default function DashboardPage() {
             </div>
           </TabsContent>
           <TabsContent value="list" className="mt-6" role="tabpanel" aria-label="Panel de lista">
+            {/* ISO 9241-11: Eficacia - Información de contexto y resumen */}
+            <div className="mb-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-4 border border-blue-200">
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="h-5 w-5 text-blue-600" />
+                    <span className="font-medium text-gray-900">
+                      {filteredRestaurants.length} {filteredRestaurants.length === 1 ? 'restaurante encontrado' : 'restaurantes encontrados'}
+                    </span>
+                  </div>
+                  {userLocation && (
+                    <div className="text-sm text-gray-600">
+                      📍 Cerca de tu ubicación actual
+                    </div>
+                  )}
+                </div>
+                <div className="flex items-center space-x-2 text-sm text-gray-600">
+                  <span>Ordenados por distancia</span>
+                  <Badge variant="outline" className="text-xs">
+                    {activeFilters.length > 0 ? `${activeFilters.length} filtros activos` : 'Sin filtros'}
+                  </Badge>
+                </div>
+              </div>
+            </div>
+
+            {/* ISO 9241-11: Eficiencia - Lista mejorada con información completa */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="region" aria-label="Lista completa de restaurantes">
               {loading ? (
                 <div className="col-span-full flex items-center justify-center py-12" role="status" aria-label="Cargando restaurantes">
@@ -307,17 +662,107 @@ export default function DashboardPage() {
                 </div>
               ) : filteredRestaurants.length === 0 ? (
                 <div className="col-span-full text-center py-12" role="status">
-                  <p className="text-gray-500 dark:text-gray-400">
-                    {t('dashboard.noresults')}
-                  </p>
+                  <div className="max-w-md mx-auto">
+                    <div className="text-6xl mb-4">🔍</div>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">No se encontraron restaurantes</h3>
+                    <p className="text-gray-500 dark:text-gray-400 mb-4">
+                      {searchQuery ? 
+                        `No hay resultados para "${searchQuery}"` : 
+                        'Intenta ajustar tus filtros de búsqueda'
+                      }
+                    </p>
+                    {(searchQuery || activeFilters.length > 0) && (
+                      <Button 
+                        variant="outline" 
+                        onClick={() => {
+                          setSearchQuery('');
+                          setActiveFilters([]);
+                        }}
+                        className="mt-2"
+                      >
+                        Limpiar búsqueda y filtros
+                      </Button>
+                    )}
+                  </div>
                 </div>
               ) : (
-                filteredRestaurants.map((restaurant) => (
-                  <RestaurantCard
-                    key={restaurant.id}
-                    restaurant={restaurant}
-                    onClick={() => handleRestaurantClick(restaurant)}
-                  />
+                filteredRestaurants.map((restaurant, index) => (
+                  <div key={restaurant.id} className="relative">
+                    {/* ISO 9241-11: Satisfacción - Tarjeta mejorada con información adicional */}
+                    <div className="group relative">
+                      <RestaurantCard
+                        restaurant={restaurant}
+                        onClick={() => handleRestaurantClick(restaurant)}
+                      />
+                      
+                      {/* ISO 9241-11: Eficacia - Botones de acción rápida */}
+                      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <div className="flex space-x-1">
+                          <Button
+                            size="sm"
+                            variant="secondary"
+                            className="h-8 w-8 p-0 bg-white/90 hover:bg-white shadow-sm"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const directionsUrl = userLocation 
+                                ? `https://www.google.com/maps/dir/${userLocation.lat},${userLocation.lng}/${restaurant.lat},${restaurant.lng}`
+                                : `https://www.google.com/maps/place/${restaurant.lat},${restaurant.lng}`;
+                              window.open(directionsUrl, '_blank');
+                            }}
+                            title="Cómo llegar"
+                            aria-label={`Obtener direcciones a ${restaurant.name}`}
+                          >
+                            🗺️
+                          </Button>
+                          {restaurant.phone && (
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              className="h-8 w-8 p-0 bg-white/90 hover:bg-white shadow-sm"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                window.open(`tel:${restaurant.phone}`, '_self');
+                              }}
+                              title="Llamar"
+                              aria-label={`Llamar a ${restaurant.name}`}
+                            >
+                              📞
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* ISO 9241-11: Eficiencia - Indicador de posición en lista */}
+                      <div className="absolute top-3 left-3">
+                        <Badge variant="secondary" className="text-xs bg-white/90 text-gray-700">
+                          #{index + 1}
+                        </Badge>
+                      </div>
+
+                      {/* ISO 9241-11: Satisfacción - Información adicional en hover */}
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-b-lg">
+                        <div className="flex items-center justify-between text-sm">
+                          <div className="flex items-center space-x-2">
+                            {restaurant.distance && (
+                              <span className="flex items-center space-x-1">
+                                <span>📍</span>
+                                <span>{restaurant.distance.toFixed(1)} km</span>
+                              </span>
+                            )}
+                            {restaurant.price_level && (
+                              <span className="flex items-center space-x-1">
+                                <span>💰</span>
+                                <span>{'$'.repeat(restaurant.price_level)}</span>
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-xs">
+                            Click para ver detalles
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 ))
               )}
             </div>
